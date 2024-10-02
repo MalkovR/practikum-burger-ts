@@ -1,7 +1,0 @@
-.gridPanel {
-    display: grid;
-    grid-template-columns: auto auto; 
-    box-sizing: border-box;
-    justify-content: space-between;
-    padding: 20px 0px;
-}

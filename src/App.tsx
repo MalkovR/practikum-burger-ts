@@ -1,20 +1,16 @@
-import style from './App.module.css'
-import AppHeader from './components/AppHeader/index'
-import BurgerIngredients from './components/BurgerIngredients/index'
-import BurgerConstructor from './components/BurgerConstructor/index'
+import style from './app.module.css'
+import AppHeader from './components/app-header'
+import Burgers from './components/burgers'
 
 
 function App() {
 
-  return (
-    < div className={style.container}>
-      <AppHeader />
-      <div className={style.burgersContainer}>
-        <BurgerIngredients />
-        <BurgerConstructor />
+    return (
+      <div className={style.container}>
+        <AppHeader />
+        <Burgers />
       </div>
-    </div>
-  )
-}
+    )
+  }
 
-export default App
+export default App;
