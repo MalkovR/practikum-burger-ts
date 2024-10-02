@@ -1,41 +1,40 @@
 .burger_ingredients_container {
-    display: flex;
-    flex-direction: column;
-    margin-right: 20px;
-    width: 50%;
-    align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  width: 50%;
+  align-items: flex-end;
 }
 
 .content {
-    width: 600px;
-    display: flex;
-    flex-direction: column;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
 }
 
-
 .title {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    height: 40px;
-    text-align: left;
-    width: 100%;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  height: 40px;
+  text-align: left;
+  width: 100%;
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .grid_panel {
-    display: grid;
-    grid-template-columns: auto auto; 
-    box-sizing: border-box;
-    justify-content: space-between;
-    padding: 20px 0px;
+  display: grid;
+  grid-template-columns: auto auto;
+  box-sizing: border-box;
+  justify-content: space-between;
+  padding: 20px 0px;
 }
 
 .scrollbar {
-    overflow: scroll;
-    height: 660px;
+  overflow: scroll;
+  height: 660px;
 }
 /* 
 .scrollbar::-webkit-scrollbar {
