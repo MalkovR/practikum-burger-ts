@@ -26,7 +26,9 @@ const IngredientDetails: React.FC<IIngredientDetails> = ({
     <div className={style.ingridient_container}>
       <div className={style.base}>
         <img src={burgerIngredient.image_large} alt="logo" />
-        <p className="text text_type_main-medium">{burgerIngredient.name}</p>
+        <p className="text text_type_main-medium pt-4 pb-8">
+          {burgerIngredient.name}
+        </p>
       </div>
       <div className={style.descriptions}>
         <Description title="Калории,ккал" count={burgerIngredient.calories} />
