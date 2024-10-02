@@ -1,4 +1,4 @@
-import './App.css'
+import style from './App.module.css'
 import AppHeader from './components/AppHeader/index'
 import BurgerIngredients from './components/BurgerIngredients/index'
 import BurgerConstructor from './components/BurgerConstructor/index'
@@ -7,9 +7,9 @@ import BurgerConstructor from './components/BurgerConstructor/index'
 function App() {
 
   return (
-    < div className='container'>
+    < div className={style.container}>
       <AppHeader />
-      <div style={{height: "100%", width: "100%", display: "flex"}}>
+      <div className={style.burgersContainer}>
         <BurgerIngredients />
         <BurgerConstructor />
       </div>
