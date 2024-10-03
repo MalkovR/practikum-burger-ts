@@ -21,10 +21,10 @@ const Burgers = () => {
           if (data.success) {
             setState({ ...state, ingridientsData: data.data, loading: false });
           } else {
-            throw new Error("Failed to parse server response")
+            throw new Error("Failed to parse server response");
           }
         } else {
-          throw new Error("Server response is not OK")
+          throw new Error("Server response is not OK");
         }
       } catch (error) {
         setState({ ...state, hasError: true, loading: false });

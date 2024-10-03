@@ -14,7 +14,11 @@ const AppHeader = () => {
         <div className={style.block_width}>
           <ul className={style.ul}>
             <li className={style.li_item}>
-              <NavMenuItem icon={BurgerIcon} name="Конструктор" isActive={true} />
+              <NavMenuItem
+                icon={BurgerIcon}
+                name="Конструктор"
+                isActive={true}
+              />
             </li>
             <li className={style.li_item}>
               <NavMenuItem
