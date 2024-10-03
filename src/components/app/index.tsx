@@ -1,6 +1,6 @@
 import style from "./app.module.css";
-import AppHeader from "./components/app-header";
-import Burgers from "./components/burgers";
+import AppHeader from "../app-header";
+import Burgers from "../burgers";
 
 function App() {
   return (
