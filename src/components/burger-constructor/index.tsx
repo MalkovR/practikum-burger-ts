@@ -9,15 +9,13 @@ import style from "./burger-constructor.module.css";
 import IBurgerIngredients, { IBurgerIngredient } from "../../types/common";
 import Modal from "../modal";
 import OrderDetails from "../order-details";
+import { useModal } from "../../hooks/use-modal";
 
 const BurgerConstructor: React.FC<IBurgerIngredients> = ({
   burgerIngredients,
 }) => {
-  const [isOrderOpen, setIsOrderOpen] = useState<boolean>(false);
 
-  const closeModal = () => {
-    setIsOrderOpen(false);
-  };
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const getItemList = (items: IBurgerIngredient[]) =>
     items.map((item) => (
@@ -69,16 +67,14 @@ const BurgerConstructor: React.FC<IBurgerIngredients> = ({
               htmlType="button"
               type="primary"
               size="medium"
-              onClick={() => {
-                setIsOrderOpen(true);
-              }}
+              onClick={openModal}
             >
               Оформить заказ
             </Button>
           </div>
         </div>
       </div>
-      {isOrderOpen && (
+      {isModalOpen && (
         <Modal onClose={closeModal}>
           <OrderDetails />
         </Modal>
