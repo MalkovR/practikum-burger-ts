@@ -5,12 +5,12 @@ import style from "./modal.module.css";
 import ModalOverlay from "../modal-overlay";
 
 export interface IModal {
-  header?: string;
+  title?: string;
   onClose: () => void;
   children: React.ReactNode;
 }
 
-const Modal: React.FC<IModal> = ({ onClose, children }) => {
+const Modal: React.FC<IModal> = ({ title, onClose, children }) => {
   useEffect(() => {
     const close = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -25,7 +25,7 @@ const Modal: React.FC<IModal> = ({ onClose, children }) => {
     <>
       <div className={`${style.modal} pt-10 pb-15 pl-10 pr-10`}>
         <div className={`${style.title} text text_type_main-large`}>
-          <p>Детали ингредиента</p>
+          <p>{title}</p>
           <button className={style.close_button} onClick={onClose}>
             <CloseIcon onClick={onClose} type="primary" />
           </button>

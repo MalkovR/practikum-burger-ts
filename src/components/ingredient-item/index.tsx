@@ -42,7 +42,7 @@ const IngredientItem: React.FC<IBurgerIngredientInfo> = ({
         <Counter count={1} size="default" extraClass="m-1" />
       </div>
       {isIngredientOpen && (
-        <Modal onClose={closeModal}>
+        <Modal title="Детали ингредиента" onClose={closeModal}>
           <IngredientDetails burgerIngredient={burgerIngredient} />
         </Modal>
       )}
