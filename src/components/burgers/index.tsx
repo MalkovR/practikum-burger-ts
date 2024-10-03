@@ -16,11 +16,19 @@ const Burgers = () => {
       setState({ ...state, loading: true });
       try {
         const res = await fetch(INGREDIENTS_URL);
-        const data = await res.json();
-        setState({ ...state, ingridientsData: data.data, loading: false });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            setState({ ...state, ingridientsData: data.data, loading: false });
+          } else {
+            throw new Error("Failed to parse server response")
+          }
+        } else {
+          throw new Error("Server response is not OK")
+        }
       } catch (error) {
         setState({ ...state, hasError: true, loading: false });
-        console.log(error);
+        console.error("Error to fetch data from server", error);
       }
     };
     getIngredientData();

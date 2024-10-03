@@ -17,16 +17,20 @@ const BurgerConstructor: React.FC<IBurgerIngredients> = ({
 
   const { isModalOpen, openModal, closeModal } = useModal();
 
-  const getItemList = (items: IBurgerIngredient[]) =>
+  const lockedBuns: IBurgerIngredient[] = burgerIngredients.filter(item => item.type === "bun");
+
+  const getIngredientsList = (items: IBurgerIngredient[]) =>
     items.map((item) => (
-      <div className={style.element} key={item._id}>
-        <DragIcon type="primary" />
-        <ConstructorElement
-          text={item.name}
-          price={item.price}
-          thumbnail={item.image_mobile}
-        />
-      </div>
+      item.type !== "bun" && (
+        <div className={style.element} key={item._id}>
+          <DragIcon type="primary" />
+          <ConstructorElement
+            text={item.name}
+            price={item.price}
+            thumbnail={item.image_mobile}
+          />
+        </div>
+      )
     ));
 
   return (
@@ -34,32 +38,28 @@ const BurgerConstructor: React.FC<IBurgerIngredients> = ({
       <div className={style.burger_constructor_container}>
         <div className={style.content}>
           <div className={style.constructor_list}>
-            <ConstructorElement
+            {lockedBuns.length && (<ConstructorElement
               type="top"
               isLocked={true}
-              text="Краторная булка N-200i (верх)"
-              price={200}
-              thumbnail={
-                "https://code.s3.yandex.net/react/code/bun-02-mobile.png"
-              }
+              text={lockedBuns[0].name}
+              price={lockedBuns[0].price}
+              thumbnail={lockedBuns[0].image_mobile}
             />
+            )}
             <div className={style.elements_list}>
-              {getItemList(burgerIngredients)}
+              {getIngredientsList(burgerIngredients)}
             </div>
-            <ConstructorElement
+            {lockedBuns.length && (<ConstructorElement
               type="bottom"
               isLocked={true}
-              text="Краторная булка N-200i (низ)"
-              price={200}
-              thumbnail={
-                "https://code.s3.yandex.net/react/code/bun-02-mobile.png"
-              }
+              text={lockedBuns[0].name}
+              price={lockedBuns[0].price}
+              thumbnail={lockedBuns[0].image_mobile}
             />
+            )}
           </div>
           <div className={style.info}>
-            <span
-              style={{ display: "flex", alignItems: "center", gap: "16px" }}
-            >
+            <span className={style.summa}>
               <p className="text text_type_main-large">800</p>
               <CurrencyIcon type="primary" />
             </span>

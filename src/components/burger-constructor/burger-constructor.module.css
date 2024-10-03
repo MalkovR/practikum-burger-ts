@@ -42,3 +42,9 @@
   margin-top: 40px;
   justify-content: flex-end;
 }
+
+.summa {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
