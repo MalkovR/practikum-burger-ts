@@ -1,17 +1,41 @@
-// import {SET_USER} from "./actions";
+import { POST_ORDER, POST_ORDER_SUCCESS, POST_ORDER_ERROR, RESET_ORDER } from "./actions"
 
 const initialState = {
-    user: null,
+    order: null,
+    loading: false,
+    error: null
 }
 
 export const reducer = (state = initialState, action) => {
-    // switch (action.type) {
-    //     case SET_USER:
-    //         return {
-    //             ...state,
-    //             user: action.payload,
-    //         }
-    //     default:
-    //         return state;
-    // }
+    switch (action.type) {
+        case POST_ORDER:
+            return {
+                ...state,
+                loading: true,
+            }
+        case POST_ORDER_SUCCESS: {
+            return {
+                ...state,
+                loading: false,
+                order: action.payload,
+            }
+        }
+        case POST_ORDER_ERROR: {
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        }
+        case RESET_ORDER: {
+            return {
+                ...state,
+                order: null,
+                loading: false,
+                error: null
+            }
+        }
+        default:
+            return state;
+    }
 }

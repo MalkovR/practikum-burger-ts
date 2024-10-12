@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import {
   ConstructorElement,
   DragIcon,
@@ -8,15 +8,17 @@ import {
 import style from "./burger-constructor.module.css";
 import Modal from "../modal";
 import OrderDetails from "../order-details";
-import { useModal } from "../../hooks/use-modal";
+// import { useModal } from "../../hooks/use-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { getBurgerIngredients } from "../../services/burger-ingredients/selectors";
 import { getConstructorIngredients } from "../../services/burger-constructor/selectors";
 import { removeIngredient } from "../../services/burger-constructor/actions";
+import { getOrderDetails, resetOrder } from "../../services/order/actions";
+import { resetConstructor } from "../../services/burger-constructor/actions";
 
 const BurgerConstructor= () => {
   const dispatch = useDispatch()
-  const { isModalOpen, openModal, closeModal } = useModal();
+  const [openModal, setOpenModal] = useState(false);
   const { bun, ingredients } = useSelector(getConstructorIngredients);
 
   const getIngredientsList = (items) =>
@@ -32,6 +34,10 @@ const BurgerConstructor= () => {
           />
         </div>
     );
+  
+  const getConstructorIds = useMemo(() => {
+    return bun ? [bun._id, ...ingredients.map((item) => item._id), bun._id] : ingredients.map((item) => item._id)
+  }, [bun, ingredients])
 
   return (
     <>
@@ -86,15 +92,23 @@ const BurgerConstructor= () => {
               htmlType="button"
               type="primary"
               size="medium"
-              onClick={openModal}
+              onClick={() => {
+                dispatch(getOrderDetails(getConstructorIds));
+                setOpenModal(true);
+              }}
+              disabled={bun ? false : true}
             >
               Оформить заказ
             </Button>
           </div>
         </div>
       </div>
-      {isModalOpen && (
-        <Modal onClose={closeModal}>
+      {openModal && (
+        <Modal onClose={() => {
+          dispatch(resetOrder());
+          setOpenModal(false);
+          dispatch(resetConstructor());
+        }}>
           <OrderDetails />
         </Modal>
       )}

@@ -1,4 +1,4 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT, ADD_BUN } from "./actions";
+import { ADD_INGREDIENT, REMOVE_INGREDIENT, ADD_BUN, RESET_CONSTRUCTOR } from "./actions";
 
 const initialState = {
     bun: null,
@@ -25,6 +25,13 @@ export const reducer = (state = initialState, action) => {
                     ? [...state.ingredients]
                     : [...state.ingredients].filter(item => item.uuid !== action.payload)
             }
+        }
+        case RESET_CONSTRUCTOR: {
+            return {
+                ...state,
+                bun: null,
+                ingredients: [],
+            };
         }
         default:
             return state;
