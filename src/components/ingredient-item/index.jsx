@@ -3,11 +3,24 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./ingredient-item.module.css";
-import React from "react";
+import React, { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { getConstructorIngredients } from "../../services/burger-constructor/selectors";
+
 
 const IngredientItem= ({
   burgerIngredient,
 }) => {
+
+  const { bun, ingredients } = useSelector(getConstructorIngredients);
+
+  const counter = useMemo(() => {
+    if (burgerIngredient.type === "bun") {
+      return bun?._id === burgerIngredient._id ? 2 : 0
+    } 
+    return ingredients.filter(item => item._id === burgerIngredient._id).length
+  }, [bun, ingredients])
+
 
   return (
     <div className={style.ingredient_item_container} >
@@ -21,7 +34,7 @@ const IngredientItem= ({
       <span className={`${style.description} text text_type_main-small`}>
         {burgerIngredient.name}
       </span>
-      <Counter count={1} size="default" extraClass="m-1" />
+      {counter && <Counter count={counter} size="default" extraClass="m-1" />}
     </div>
   );
 };
