@@ -36,7 +36,16 @@ const BurgerConstructor= () => {
     );
   
   const getConstructorIds = useMemo(() => {
-    return bun ? [bun._id, ...ingredients.map((item) => item._id), bun._id] : ingredients.map((item) => item._id)
+    return bun
+    ? [bun._id, ...ingredients.map((item) => item._id), bun._id]
+    : ingredients.map((item) => item._id)
+  }, [bun, ingredients])
+
+
+  const overallPrice = useMemo(() => {
+    return bun
+      ? bun.price * 2 + ingredients.reduce((summa, item) => summa + item.price, 0)
+      : ingredients.reduce((summa, item) => summa + item.price, 0)
   }, [bun, ingredients])
 
   return (
@@ -85,7 +94,7 @@ const BurgerConstructor= () => {
           </div>
           <div className={style.info}>
             <span className={style.summa}>
-              <p className="text text_type_main-large">800</p>
+              <p className="text text_type_main-large">{overallPrice}</p>
               <CurrencyIcon type="primary" />
             </span>
             <Button
