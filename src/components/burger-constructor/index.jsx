@@ -8,7 +8,6 @@ import {
 import style from "./burger-constructor.module.css";
 import Modal from "../modal";
 import OrderDetails from "../order-details";
-// import { useModal } from "../../hooks/use-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { getBurgerIngredients } from "../../services/burger-ingredients/selectors";
 import { getConstructorIngredients } from "../../services/burger-constructor/selectors";
@@ -58,7 +57,7 @@ const BurgerConstructor= () => {
               <ConstructorElement
                 type="top"
                 isLocked={true}
-                text={bun.name}
+                text={`${bun.name} (верх)`}
                 price={bun.price}
                 thumbnail={bun.image_mobile}
               />
@@ -82,7 +81,7 @@ const BurgerConstructor= () => {
               <ConstructorElement
                 type="bottom"
                 isLocked={true}
-                text={bun.name}
+                text={`${bun.name} (низ)`}
                 price={bun.price}
                 thumbnail={bun.image_mobile}
               />
