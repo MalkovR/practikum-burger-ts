@@ -6,21 +6,21 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-constructor.module.css";
-import IBurgerIngredients, { IBurgerIngredient } from "../../types/common";
 import Modal from "../modal";
 import OrderDetails from "../order-details";
 import { useModal } from "../../hooks/use-modal";
+import { useDispatch, useSelector } from "react-redux";
+import { getBurgerIngredients } from "../../services/burger-ingredients/selectors";
 
-const BurgerConstructor: React.FC<IBurgerIngredients> = ({
-  burgerIngredients,
-}) => {
+const BurgerConstructor= () => {
   const { isModalOpen, openModal, closeModal } = useModal();
+  const { ingredients } = useSelector(getBurgerIngredients);
 
-  const lockedBuns: IBurgerIngredient[] = burgerIngredients.filter(
+  const lockedBuns = ingredients.filter(
     (item) => item.type === "bun",
   );
 
-  const getIngredientsList = (items: IBurgerIngredient[]) =>
+  const getIngredientsList = (items) =>
     items.map(
       (item) =>
         item.type !== "bun" && (
@@ -50,7 +50,7 @@ const BurgerConstructor: React.FC<IBurgerIngredients> = ({
               />
             )}
             <div className={style.elements_list}>
-              {getIngredientsList(burgerIngredients)}
+              {getIngredientsList(ingredients)}
             </div>
             {lockedBuns.length && (
               <ConstructorElement

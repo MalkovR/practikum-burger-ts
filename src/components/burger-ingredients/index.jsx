@@ -1,28 +1,36 @@
 import React from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-ingredients.module.css";
-import IBurgerIngredients, { IBurgerIngredient } from "../../types/common";
 import IngredientItem from "../ingredient-item";
+import { useDispatch, useSelector } from "react-redux";
+import { getBurgerIngredients } from "../../services/burger-ingredients/selectors";
+import { getSelectedIngredient } from "../../services/selected-ingredient/selectors";
+import { getIngredientsDetails, resetIngredientsDetails } from "../../services/selected-ingredient/actions";
+import Modal from "../modal";
+import IngredientDetails from "../ingredient-details";
 
-const BurgerIngredients: React.FC<IBurgerIngredients> = ({
-  burgerIngredients,
-}) => {
+const BurgerIngredients = () => {
+  const dispatch = useDispatch();
   const [current, setCurrent] = React.useState("bun");
+  const { ingredients } = useSelector(getBurgerIngredients);
+  const { selectedIngredient}  = useSelector(getSelectedIngredient);
 
-  const buns = burgerIngredients.filter(
+  const buns = ingredients.filter(
     (ingredient) => ingredient.type === "bun",
   );
-  const sauces = burgerIngredients.filter(
+  const sauces = ingredients.filter(
     (ingredient) => ingredient.type === "sauce",
   );
-  const mains = burgerIngredients.filter(
+  const mains = ingredients.filter(
     (ingredient) => ingredient.type === "main",
   );
 
-  const getItemList = (items: IBurgerIngredient[]) => (
+  const getItemList = (items) => (
     <div className={style.grid_panel}>
       {items.map((item) => (
-        <div key={item._id}>
+        <div
+        key={item._id}
+        onClick={() => dispatch(getIngredientsDetails(item))}>
           <IngredientItem burgerIngredient={item} />
         </div>
       ))}
@@ -30,6 +38,7 @@ const BurgerIngredients: React.FC<IBurgerIngredients> = ({
   );
 
   return (
+    <>
     <div className={style.burger_ingredients_container}>
       <div className={style.content}>
         <div className={style.title}>
@@ -62,6 +71,14 @@ const BurgerIngredients: React.FC<IBurgerIngredients> = ({
         </div>
       </div>
     </div>
+    {selectedIngredient && (
+        <Modal
+          title="Детали ингредиента"
+          onClose={() => dispatch(resetIngredientsDetails())}>
+          <IngredientDetails burgerIngredient={selectedIngredient} />
+        </Modal>
+    )}
+  </>
   );
 };
 
