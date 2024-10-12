@@ -26,8 +26,6 @@ const Burgers = () => {
       return <p>Нет ингредиентов</p>;
   }
 
-  console.log(ingredients)
-
   return (
     <div className={style.burgers_container}>
       <BurgerIngredients />

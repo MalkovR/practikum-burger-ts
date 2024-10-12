@@ -6,7 +6,7 @@ import { reducer as orderReducer } from "./order/reducer";
 
 export const rootReducer = combineReducers({
     burgerIngredients: burgerIngredientsReducer,
-    // burgerConstructor: burgerConstructorReducer,
+    burgerConstructor: burgerConstructorReducer,
     selectedIngredient: selectedIngredientReducer,
     // order: orderReducer,
 });

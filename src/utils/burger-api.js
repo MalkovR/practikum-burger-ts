@@ -10,7 +10,7 @@ const checkJsonSuccess = (data) => {
 };
 
 export const getIngredientData = () => {
-      return fetch(INGREDIENTS_URL)
-          .then(checkFetchResponse)
-          .then(checkJsonSuccess)
+    return fetch(INGREDIENTS_URL)
+        .then(checkFetchResponse)
+        .then(checkJsonSuccess)
 }
