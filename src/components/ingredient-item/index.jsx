@@ -22,14 +22,16 @@ const IngredientItem= ({
     return ingredients.filter(item => item._id === burgerIngredient._id).length
   }, [bun, ingredients])
 
-  const [, drag] = useDrag(() => ({
+  const [{ isDragging } , drag] = useDrag(() => ({
     type: "ingredient",
     item: burgerIngredient,
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
   }));
 
-
   return (
-    <div className={style.ingredient_item_container} ref={drag}>
+    <div className={`${style.ingredient_item_container} ${isDragging && style.opacity}`} ref={drag}>
       <img src={burgerIngredient.image} alt={burgerIngredient.name} />
       <span className={`${style.price} mt-1 mb-1`}>
         <p className="text text_type_digits-medium mr-2">

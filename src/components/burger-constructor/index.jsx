@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from "react";
 import {
   ConstructorElement,
-  DragIcon,
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -9,31 +8,17 @@ import style from "./burger-constructor.module.css";
 import Modal from "../modal";
 import OrderDetails from "../order-details";
 import { useDispatch, useSelector } from "react-redux";
-import { getBurgerIngredients } from "../../services/burger-ingredients/selectors";
 import { getConstructorIngredients } from "../../services/burger-constructor/selectors";
-import { removeIngredient, addBun, addIngredient } from "../../services/burger-constructor/actions";
+import { addBun, addIngredient } from "../../services/burger-constructor/actions";
 import { getOrderDetails, resetOrder } from "../../services/order/actions";
 import { resetConstructor } from "../../services/burger-constructor/actions";
 import { useDrop } from "react-dnd";
+import { BurgerConstructorItem } from "../burger-constructor-item/index"
 
 const BurgerConstructor= () => {
   const dispatch = useDispatch()
   const [openModal, setOpenModal] = useState(false);
   const { bun, ingredients } = useSelector(getConstructorIngredients);
-
-  const getIngredientsList = (items) =>
-    items.map(
-      (item) =>
-        <div className={style.element} key={item.uuid}>
-          <DragIcon type="primary" />
-          <ConstructorElement
-            text={item.name}
-            price={item.price}
-            thumbnail={item.image_mobile}
-            handleClose={() => dispatch(removeIngredient(item.uuid))}
-          />
-        </div>
-    );
   
   const getConstructorIds = useMemo(() => {
     return bun
@@ -55,7 +40,7 @@ const BurgerConstructor= () => {
         ? dispatch(addBun(item))
         : dispatch(addIngredient(item));
     },
-  }))
+  }));
 
   return (
     <>
@@ -79,7 +64,9 @@ const BurgerConstructor= () => {
             {ingredients.length
             ?
               <div className={style.elements_list}>
-                {getIngredientsList(ingredients)}
+                {ingredients.map((item, index) => (
+                  <BurgerConstructorItem key={item.uuid} id={item.uuid} index={index} item={item}/>
+                ))}
               </div>
             :
               <div className={`constructor-element ${style.align_center}`}>

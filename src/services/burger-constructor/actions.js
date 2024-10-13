@@ -4,6 +4,7 @@ export const ADD_INGREDIENT = "ADD_INGREDIENT";
 export const REMOVE_INGREDIENT = "REMOVE_INGREDIENT";
 export const ADD_BUN = "ADD_BUN";
 export const RESET_CONSTRUCTOR = 'RESET_CONSTRUCTOR';
+export const MOVE_INGREDIENT = "MOVE_INGREDIENT"
 
 
 export const addIngredient = (data) => (dispatch) => {
@@ -30,5 +31,12 @@ export const addBun = (data) => (dispatch) => {
 export const resetConstructor = () => {
     return {
         type: RESET_CONSTRUCTOR,
+    }
+}
+
+export const moveIngredient = (toIndex, fromIndex) => {
+    return {
+        type: MOVE_INGREDIENT,
+        payload: { toIndex, fromIndex }
     }
 }

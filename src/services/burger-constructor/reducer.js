@@ -1,4 +1,4 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT, ADD_BUN, RESET_CONSTRUCTOR } from "./actions";
+import { ADD_INGREDIENT, REMOVE_INGREDIENT, ADD_BUN, RESET_CONSTRUCTOR, MOVE_INGREDIENT } from "./actions";
 
 const initialState = {
     bun: null,
@@ -31,6 +31,14 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 bun: null,
                 ingredients: [],
+            };
+        }
+        case MOVE_INGREDIENT: {
+            const currentIngredients = [...state.ingredients];
+            currentIngredients.splice(action.payload.toIndex, 0, currentIngredients.splice(action.payload.fromIndex, 1)[0]);
+            return {
+                ...state,
+                ingredients: currentIngredients
             };
         }
         default:
