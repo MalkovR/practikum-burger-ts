@@ -7,9 +7,11 @@ import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { getConstructorIngredients } from "../../services/burger-constructor/selectors";
 import { useDrag } from "react-dnd";
+import PropTypes from 'prop-types';
+import { IngredientItemType } from "../../types/types";
 
 
-const IngredientItem= ({
+const IngredientItem = ({
   burgerIngredient,
 }) => {
 
@@ -46,5 +48,9 @@ const IngredientItem= ({
     </div>
   );
 };
+
+IngredientItem.propTypes = {
+  burgerIngredient: IngredientItemType.isRequired,
+}
 
 export default IngredientItem;

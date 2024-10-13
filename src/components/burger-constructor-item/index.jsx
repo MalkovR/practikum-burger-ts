@@ -10,6 +10,8 @@ import { useDrop, useDrag } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { resetConstructor, moveIngredient } from "../../services/burger-constructor/actions";
 import { removeIngredient, addBun, addIngredient } from "../../services/burger-constructor/actions";
+import PropTypes from 'prop-types';
+import { IngredientItemType } from "../../types/types";
 
 
 const BurgerConstructorItem = ({id, index, item}) => {
@@ -74,5 +76,11 @@ const BurgerConstructorItem = ({id, index, item}) => {
         </div>
     )
 };
+
+BurgerConstructorItem.propTypes = {
+    id: PropTypes.string,
+    index: PropTypes.number,
+    item: IngredientItemType.isRequired,
+}
 
 export { BurgerConstructorItem };

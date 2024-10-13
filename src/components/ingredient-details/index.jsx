@@ -1,25 +1,17 @@
 import React from "react";
-
-import { IBurgerIngredient } from "../../types/common";
 import style from "./ingredient-details.module.css";
+import PropTypes from 'prop-types';
+import { IngredientItemType } from "../../types/types";
 
-export interface IIngredientDetails {
-  burgerIngredient: IBurgerIngredient;
-}
 
-export interface IDescription {
-  title: string;
-  count: number;
-}
-
-const Description: React.FC<IDescription> = ({ title, count }) => (
+const Description = ({ title, count }) => (
   <div className={style.description}>
     <p className="text text_type_main-default text_color_inactive">{title}</p>
     <p className="text text_type_main-default text_color_inactive">{count}</p>
   </div>
 );
 
-const IngredientDetails: React.FC<IIngredientDetails> = ({
+const IngredientDetails = ({
   burgerIngredient,
 }) => {
   return (
@@ -42,5 +34,15 @@ const IngredientDetails: React.FC<IIngredientDetails> = ({
     </div>
   );
 };
+
+Description.propTypes = {
+  title: PropTypes.string,
+  count: PropTypes.number,
+}
+
+IngredientDetails.propTypes = {
+  burgerIngredient: IngredientItemType.isRequired,
+}
+
 
 export default IngredientDetails;
