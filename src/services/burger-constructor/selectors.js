@@ -1,3 +1,3 @@
-import {createSelector} from "reselect";
+import { createSelector } from "reselect";
 
-export const getConstructorIngredients = state => state.burgerConstructor;
+export const getConstructorIngredients = (state) => state.burgerConstructor;

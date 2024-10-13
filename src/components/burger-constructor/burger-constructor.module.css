@@ -25,7 +25,7 @@
   flex-direction: column;
   gap: 10px;
   overflow: auto;
-  height:auto;
+  height: auto;
   max-height: 450px;
 }
 

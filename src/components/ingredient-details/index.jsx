@@ -1,8 +1,7 @@
 import React from "react";
 import style from "./ingredient-details.module.css";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { IngredientItemType } from "../../types/types";
-
 
 const Description = ({ title, count }) => (
   <div className={style.description}>
@@ -11,9 +10,7 @@ const Description = ({ title, count }) => (
   </div>
 );
 
-const IngredientDetails = ({
-  burgerIngredient,
-}) => {
+const IngredientDetails = ({ burgerIngredient }) => {
   return (
     <div className={style.ingridient_container}>
       <div className={style.base}>
@@ -38,11 +35,10 @@ const IngredientDetails = ({
 Description.propTypes = {
   title: PropTypes.string,
   count: PropTypes.number,
-}
+};
 
 IngredientDetails.propTypes = {
   burgerIngredient: IngredientItemType.isRequired,
-}
-
+};
 
 export default IngredientDetails;

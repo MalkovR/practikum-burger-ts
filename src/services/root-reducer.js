@@ -5,8 +5,8 @@ import { reducer as selectedIngredientReducer } from "./selected-ingredient/redu
 import { reducer as orderReducer } from "./order/reducer";
 
 export const rootReducer = combineReducers({
-    burgerIngredients: burgerIngredientsReducer,
-    burgerConstructor: burgerConstructorReducer,
-    selectedIngredient: selectedIngredientReducer,
-    order: orderReducer,
+  burgerIngredients: burgerIngredientsReducer,
+  burgerConstructor: burgerConstructorReducer,
+  selectedIngredient: selectedIngredientReducer,
+  order: orderReducer,
 });

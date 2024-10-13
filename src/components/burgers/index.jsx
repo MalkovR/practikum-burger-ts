@@ -11,19 +11,19 @@ const Burgers = () => {
   const { loading, error, ingredients } = useSelector(getBurgerIngredients);
 
   useEffect(() => {
-    dispatch(getIngredients())
-  }, [])
+    dispatch(getIngredients());
+  }, []);
 
   if (loading) {
-    return <p>Загрузка...</p>
+    return <p>Загрузка...</p>;
   }
 
   if (error) {
-      return <p>Ошибка: {error}</p>
+    return <p>Ошибка: {error}</p>;
   }
 
   if (ingredients.length === 0) {
-      return <p>Нет ингредиентов</p>;
+    return <p>Нет ингредиентов</p>;
   }
 
   return (

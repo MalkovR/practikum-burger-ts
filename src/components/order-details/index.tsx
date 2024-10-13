@@ -4,14 +4,14 @@ import { useSelector } from "react-redux";
 import { getOrderDetails } from "../../services/order/selectors";
 
 const OrderDetails = () => {
-  const { order, loading, error } = useSelector(getOrderDetails)
+  const { order, loading, error } = useSelector(getOrderDetails);
 
   if (loading) {
-    return <p>Отправка данных для оформления заказа. Ожидайте.</p>
+    return <p>Отправка данных для оформления заказа. Ожидайте.</p>;
   }
 
   if (error) {
-      return <p>Возникла ошибка с оформлением заказа: {error}</p>
+    return <p>Возникла ошибка с оформлением заказа: {error}</p>;
   }
 
   return (
@@ -27,7 +27,7 @@ const OrderDetails = () => {
         Ваш заказ начали готовить
       </div>
       <div className="text text_type_main-default text_color_inactive">
-        Дождитесь готовности на орбитальнос станции
+        Дождитесь готовности на орбитальной станции
       </div>
     </div>
   );
