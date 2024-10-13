@@ -6,6 +6,7 @@ import style from "./ingredient-item.module.css";
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { getConstructorIngredients } from "../../services/burger-constructor/selectors";
+import { useDrag } from "react-dnd";
 
 
 const IngredientItem= ({
@@ -21,9 +22,14 @@ const IngredientItem= ({
     return ingredients.filter(item => item._id === burgerIngredient._id).length
   }, [bun, ingredients])
 
+  const [, drag] = useDrag(() => ({
+    type: "ingredient",
+    item: burgerIngredient,
+  }));
+
 
   return (
-    <div className={style.ingredient_item_container} >
+    <div className={style.ingredient_item_container} ref={drag}>
       <img src={burgerIngredient.image} alt={burgerIngredient.name} />
       <span className={`${style.price} mt-1 mb-1`}>
         <p className="text text_type_digits-medium mr-2">

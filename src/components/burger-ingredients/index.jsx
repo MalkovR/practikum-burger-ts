@@ -8,7 +8,6 @@ import { getSelectedIngredient } from "../../services/selected-ingredient/select
 import { getIngredientsDetails, resetIngredientsDetails } from "../../services/selected-ingredient/actions";
 import Modal from "../modal";
 import IngredientDetails from "../ingredient-details";
-import { addBun, addIngredient } from "../../services/burger-constructor/actions";
 
 const BurgerIngredients = () => {
   const dispatch = useDispatch();
@@ -50,14 +49,7 @@ const BurgerIngredients = () => {
       {items.map((item) => (
         <div
         key={item._id}
-        onClick={() => {
-          dispatch(getIngredientsDetails(item));
-          if (item.type === "bun") {
-            dispatch(addBun(item));
-          } else {
-            dispatch(addIngredient(item));
-          }
-        }}>
+        onClick={() => dispatch(getIngredientsDetails(item))}>
           <IngredientItem burgerIngredient={item} />
         </div>
       ))}

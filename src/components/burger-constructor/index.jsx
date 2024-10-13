@@ -11,9 +11,10 @@ import OrderDetails from "../order-details";
 import { useDispatch, useSelector } from "react-redux";
 import { getBurgerIngredients } from "../../services/burger-ingredients/selectors";
 import { getConstructorIngredients } from "../../services/burger-constructor/selectors";
-import { removeIngredient } from "../../services/burger-constructor/actions";
+import { removeIngredient, addBun, addIngredient } from "../../services/burger-constructor/actions";
 import { getOrderDetails, resetOrder } from "../../services/order/actions";
 import { resetConstructor } from "../../services/burger-constructor/actions";
+import { useDrop } from "react-dnd";
 
 const BurgerConstructor= () => {
   const dispatch = useDispatch()
@@ -47,11 +48,20 @@ const BurgerConstructor= () => {
       : ingredients.reduce((summa, item) => summa + item.price, 0)
   }, [bun, ingredients])
 
+  const [, drop] = useDrop(() => ({
+    accept: "ingredient",
+    drop(item) {
+        item.type === 'bun'
+        ? dispatch(addBun(item))
+        : dispatch(addIngredient(item));
+    },
+  }))
+
   return (
     <>
       <div className={style.burger_constructor_container}>
         <div className={style.content}>
-          <div className={style.constructor_list}>
+          <div className={style.constructor_list} ref={drop}>
             {bun
             ?
               <ConstructorElement
