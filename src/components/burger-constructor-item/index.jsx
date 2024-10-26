@@ -73,7 +73,6 @@ const BurgerConstructorItem = ({ id, index, item }) => {
   return (
     <div
       className={`${style.element} ${isDragging && style.opacity}`}
-      key={item.uuid}
       ref={ref}
     >
       <DragIcon type="primary" />

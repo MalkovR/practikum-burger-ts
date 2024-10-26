@@ -116,7 +116,7 @@ const BurgerConstructor = () => {
                 dispatch(getOrderDetails(getConstructorIds));
                 setOpenModal(true);
               }}
-              disabled={bun ? false : true}
+              disabled={!bun}
             >
               Оформить заказ
             </Button>

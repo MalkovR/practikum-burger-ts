@@ -1,28 +1,32 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-ingredients.module.css";
-import IngredientItem from "../ingredient-item";
+import BurgerIngredientsList from "../burger-ingredients-list";
 import { useDispatch, useSelector } from "react-redux";
 import { getBurgerIngredients } from "../../services/burger-ingredients/selectors";
 import { getSelectedIngredient } from "../../services/selected-ingredient/selectors";
-import {
-  getIngredientsDetails,
-  resetIngredientsDetails,
-} from "../../services/selected-ingredient/actions";
+import { resetIngredientsDetails } from "../../services/selected-ingredient/actions";
 import Modal from "../modal";
 import IngredientDetails from "../ingredient-details";
 
 const BurgerIngredients = () => {
   const dispatch = useDispatch();
   const [currentTab, setCurrentTab] = useState("bun");
-  const { ingredients } = useSelector(getBurgerIngredients);
-  const { selectedIngredient } = useSelector(getSelectedIngredient);
+  const ingredients = useSelector(getBurgerIngredients);
+  const selectedIngredient = useSelector(getSelectedIngredient);
 
-  const buns = ingredients.filter((ingredient) => ingredient.type === "bun");
-  const sauces = ingredients.filter(
-    (ingredient) => ingredient.type === "sauce",
+  const buns = useMemo(
+    () => ingredients.filter((ingredient) => ingredient.type === "bun"),
+    [ingredients],
   );
-  const mains = ingredients.filter((ingredient) => ingredient.type === "main");
+  const sauces = useMemo(
+    () => ingredients.filter((ingredient) => ingredient.type === "sauce"),
+    [ingredients],
+  );
+  const mains = useMemo(
+    () => ingredients.filter((ingredient) => ingredient.type === "main"),
+    [ingredients],
+  );
 
   const refTabs = useRef(null);
   const refBuns = useRef(null);
@@ -42,19 +46,6 @@ const BurgerIngredients = () => {
 
     setCurrentTab(minDeltaIngredientName);
   };
-
-  const getItemList = (items) => (
-    <div className={style.grid_panel}>
-      {items.map((item) => (
-        <div
-          key={item._id}
-          onClick={() => dispatch(getIngredientsDetails(item))}
-        >
-          <IngredientItem burgerIngredient={item} />
-        </div>
-      ))}
-    </div>
-  );
 
   return (
     <>
@@ -90,15 +81,15 @@ const BurgerIngredients = () => {
             <div className={style.title} ref={refBuns}>
               <p className="text_type_main-medium">Булки</p>
             </div>
-            {getItemList(buns)}
+            {buns && <BurgerIngredientsList items={buns} />}
             <div className={style.title} ref={refSauces}>
               <p className="text_type_main-medium">Соусы</p>
             </div>
-            {getItemList(sauces)}
+            {sauces && <BurgerIngredientsList items={sauces} />}
             <div className={style.title} ref={refMains}>
               <p className="text_type_main-medium">Начинки</p>
             </div>
-            {getItemList(mains)}
+            {mains && <BurgerIngredientsList items={mains} />}
           </div>
         </div>
       </div>
