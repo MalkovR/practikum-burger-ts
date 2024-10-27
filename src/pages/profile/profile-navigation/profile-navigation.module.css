@@ -1,0 +1,17 @@
+.nav {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  line-height: 30px;
+  text-align: left;
+  align-content: center;
+  height: 64px;
+}
+
+.description {
+  width: 320px;
+  text-align: left;
+}
