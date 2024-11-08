@@ -5,12 +5,16 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { resetPasswordRequest } from "../../utils/burger-api";
 
 const ResetPassword = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const passwordRef = useRef(null);
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [token, setToken] = useState("");
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
   const hidePassword = () => {
@@ -24,13 +28,19 @@ const ResetPassword = () => {
     }
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    resetPasswordRequest(password, token);
+    navigate("/login", { state: { resetPassword: false } });
+  };
+
   return (
     <div className={style.reset_page_container}>
       <div className={style.reset_form}>
         <h2 className="text text_type_main-medium mb-4">
           Восстановление пароля
         </h2>
-        <form name="register" className={style.login} onSubmit={""}>
+        <form name="resetPassword" className={style.login} onSubmit={onSubmit}>
           <Input
             ref={passwordRef}
             type={"password"}
@@ -46,14 +56,14 @@ const ResetPassword = () => {
           <Input
             type={"text"}
             placeholder={"Введите код из письма"}
-            value={email}
-            onChange={(e) => setUsername(e.target.value)}
+            value={token}
+            onChange={(e) => setToken(e.target.value)}
             name={"код"}
             errorText={"Ошибка"}
             size={"default"}
           />
 
-          <Button type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium">
             Сохранить
           </Button>
         </form>

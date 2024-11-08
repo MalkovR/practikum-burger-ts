@@ -10,3 +10,10 @@
   align-items: center;
   row-gap: 24px;
 }
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-beetween;
+  column-gap: 25px;
+}

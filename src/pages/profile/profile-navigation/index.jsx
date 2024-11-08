@@ -1,8 +1,17 @@
 import React from "react";
 import style from "./profile-navigation.module.css";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../services/auth/actions";
 
 const ProfileNavigation = () => {
+  const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
+
   return (
     <nav className="mr-15 ml-15">
       <NavLink to="/profile">
@@ -15,7 +24,7 @@ const ProfileNavigation = () => {
           История заказов
         </p>
       </NavLink>
-      <div onClick="" className="mb-20">
+      <div onClick={handleLogout} className="mb-20">
         <p
           className={`text text_type_main-medium text_color_inactive ${style.text}`}
         >

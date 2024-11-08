@@ -5,9 +5,20 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { forgotPasswordRequest } from "../../utils/burger-api";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    forgotPasswordRequest(email);
+    navigate("/reset-password", { state: { resetPassword: true } });
+  };
 
   return (
     <div className={style.forgot_page_container}>
@@ -15,7 +26,7 @@ const ForgotPassword = () => {
         <h2 className="text text_type_main-medium mb-4">
           Восстановление пароля
         </h2>
-        <form name="login" className={style.login} onSubmit={""}>
+        <form name="forgotPassword" className={style.login} onSubmit={onSubmit}>
           <Input
             type={"email"}
             placeholder={"Укажите e-mail"}
@@ -26,7 +37,12 @@ const ForgotPassword = () => {
             size={"default"}
           />
 
-          <Button type="primary" size="medium">
+          <Button
+            htmlType="submit"
+            type="primary"
+            size="medium"
+            disabled={!email}
+          >
             Восстановить
           </Button>
         </form>

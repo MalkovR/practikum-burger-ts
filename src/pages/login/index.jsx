@@ -5,8 +5,11 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import { login } from "../../services/auth/actions";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const passwordRef = useRef(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,11 +26,16 @@ const Login = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login({ email: email, password: password }));
+  };
+
   return (
     <div className={style.login_page_container}>
       <div className={style.login_form}>
         <h2 className="text text_type_main-medium mb-4">Вход</h2>
-        <form name="login" className={style.login} onSubmit={""}>
+        <form name="login" className={style.login} onSubmit={handleSubmit}>
           <Input
             type={"email"}
             placeholder={"E-mail"}
@@ -50,7 +58,7 @@ const Login = () => {
             onIconClick={hidePassword}
           />
 
-          <Button type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium">
             Войти
           </Button>
         </form>

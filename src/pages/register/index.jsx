@@ -5,8 +5,11 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { register } from "../../services/auth/actions";
 
 const Register = () => {
+  const dispatch = useDispatch();
   const passwordRef = useRef(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,15 +27,20 @@ const Register = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(register({ email: email, password: password, name: username }));
+  };
+
   return (
     <div className={style.register_page_container}>
       <div className={style.register_form}>
         <h2 className="text text_type_main-medium mb-4">Регистрация</h2>
-        <form name="register" className={style.login} onSubmit={""}>
+        <form name="register" className={style.login} onSubmit={handleSubmit}>
           <Input
             type={"text"}
             placeholder={"Имя"}
-            value={email}
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
             name={"username"}
             errorText={"Ошибка"}
@@ -60,7 +68,7 @@ const Register = () => {
             onIconClick={hidePassword}
           />
 
-          <Button type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium">
             Зарегистрироваться
           </Button>
         </form>
