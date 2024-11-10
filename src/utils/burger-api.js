@@ -15,13 +15,21 @@ import {
 const checkFetchResponse = (res) => {
   return res.ok
     ? res.json()
-    : Promise.reject(`Server response error ${res.status}`);
+    : res.json().then((err) => {
+        if (err.message || err.error) {
+          return err;
+        } else {
+          return Promise.reject(err);
+        }
+      });
 };
 
 const checkJsonSuccess = (data) => {
   return data && data.success
     ? data
-    : Promise.reject("Failed to parse server response");
+    : data && data.message
+      ? Promise.reject(new Error(data.message || data.error))
+      : Promise.reject("Failed to parse server response");
 };
 
 // получение ингредиентов
@@ -140,10 +148,6 @@ const patchUserEditOptions = (accessToken, email, password, name) => {
 };
 
 export const editUserRequest = (accessToken, email, password, name) => {
-  console.log("accessToken: ", accessToken);
-  console.log("email: ", email);
-  console.log("password: ", password);
-  console.log("name: ", name);
   return fetch(
     USER_URL,
     patchUserEditOptions(accessToken, email, password, name),

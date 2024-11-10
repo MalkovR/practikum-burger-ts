@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     dispatch(getIngredients());
     dispatch(checkUserAuth());
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return <p>Загрузка...</p>;
@@ -53,22 +53,30 @@ function App() {
       <DndProvider backend={HTML5Backend}>
         <AppHeader />
         <Routes location={backgroundState || location}>
-          <Route path="/" element={<Burgers />} />
+          <Route exact path="/" element={<Burgers />} />
           <Route path="ingredients/:id" element={<IngredientDetails />} />
-          <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
           <Route
+            exact
+            path="/login"
+            element={<OnlyUnAuth component={<Login />} />}
+          />
+          <Route
+            exact
             path="/register"
             element={<OnlyUnAuth component={<Register />} />}
           />
           <Route
+            exact
             path="/forgot-password"
             element={<OnlyUnAuth component={<ForgotPassword />} />}
           />
           <Route
+            exact
             path="/reset-password"
             element={<OnlyUnAuth component={<ResetPassword />} />}
           />
           <Route
+            exact
             path="/profile"
             element={<OnlyAuth component={<Profile />} />}
           />

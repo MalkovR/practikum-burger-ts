@@ -44,15 +44,24 @@ export const setAuthChecked = (value) => ({
 
 export const checkUserAuth = () => {
   return (dispatch) => {
-    const accessToken = getCookie("accessToken");
+    dispatch(userProfileRequest());
+    let accessToken = getCookie("accessToken");
+
     if (accessToken) {
+      accessToken = "Bearer " + accessToken;
       getUserRequest(accessToken)
-        .catch(() => {
-          deleteCookie("refreshToken");
-          deleteCookie("accessToken");
-          dispatch(userLogoutSuccessRequest());
-        })
-        .finally(() => dispatch(setAuthChecked(true)));
+        .then((res) => dispatch(userProfileSuccessRequest(res.user)))
+        .catch((error) => {
+          if (error.message === "jwt expired") {
+            renewTokens().then(() => {
+              dispatch(checkUserAuth());
+            });
+          } else {
+            localStorage.removeItem("refreshToken");
+            deleteCookie("accessToken");
+            dispatch(userProfileErrorRequest());
+          }
+        });
     } else {
       dispatch(setAuthChecked(true));
     }
@@ -80,11 +89,11 @@ export const register = ({ email, password, name }) => {
     dispatch(userRegisterRequest());
     registerRequest(email, password, name)
       .then((res) => {
-        dispatch(userRegisterSuccessRequest(res.user));
         const accessToken = res.accessToken.split("Bearer ")[1];
         const refreshToken = res.refreshToken;
         setCookie("accessToken", accessToken, {});
-        setCookie("refreshToken", refreshToken, {});
+        localStorage.setItem("refreshToken", refreshToken);
+        dispatch(userRegisterSuccessRequest(res.user));
       })
       .catch((error) => {
         dispatch(userRegisterErrorRequest(error));
@@ -111,19 +120,38 @@ export const renewToken = () => {
   return (dispatch) => {
     dispatch(userRenewTokenRequest());
 
-    const refreshToken = getCookie("refreshToken");
+    const refreshToken = localStorage.getItem("refreshToken");
     renewTokenRequest(refreshToken)
       .then((res) => {
-        dispatch(userRenewTokenSuccessRequest());
+        // deleteCookie("accessToken");
+        // localStorage.removeItem("refreshToken");
         const accessToken = res.accessToken.split("Bearer ")[1];
         const refreshToken = res.refreshToken;
         setCookie("accessToken", accessToken, {});
-        setCookie("refreshToken", refreshToken, {});
+        localStorage.setItem("refreshToken", refreshToken);
+        dispatch(userRenewTokenSuccessRequest());
       })
       .catch((error) => {
         dispatch(userRenewTokenErrorRequest(error));
       });
   };
+};
+
+export const renewTokens = () => {
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  return renewTokenRequest(refreshToken)
+    .then((res) => {
+      const accessToken = res.accessToken.split("Bearer ")[1];
+      const refreshToken = res.refreshToken;
+
+      setCookie("accessToken", accessToken, {});
+      localStorage.setItem("refreshToken", refreshToken);
+    })
+    .catch((error) => {
+      deleteCookie("accessToken");
+      localStorage.removeItem("refreshToken");
+    });
 };
 
 // Авторизация
@@ -150,7 +178,7 @@ export const login = ({ email, password }) => {
         const accessToken = res.accessToken.split("Bearer ")[1];
         const refreshToken = res.refreshToken;
         setCookie("accessToken", accessToken, {});
-        setCookie("refreshToken", refreshToken, {});
+        localStorage.setItem("refreshToken", refreshToken);
         dispatch(userLoginSuccessRequest(res.user));
       })
       .catch((error) => {
@@ -178,11 +206,11 @@ export const logout = () => {
   return (dispatch) => {
     dispatch(userLogoutRequest());
 
-    const refreshToken = getCookie("refreshToken");
+    const refreshToken = localStorage.getItem("refreshToken");
     logoutRequest(refreshToken)
       .then(() => {
         dispatch(userLogoutSuccessRequest());
-        deleteCookie("refreshToken");
+        localStorage.removeItem("refreshToken");
         deleteCookie("accessToken");
       })
       .catch((error) => {
@@ -218,7 +246,7 @@ export const profile = () => {
       })
       .catch((error) => {
         if (error.message === "jwt expired") {
-          renewToken();
+          dispatch(renewToken());
           dispatch(profile());
         } else {
           dispatch(userProfileErrorRequest(error));
@@ -238,8 +266,9 @@ const userUpdateProfileErrorRequest = (error) => ({
   payload: error,
 });
 
-const userUpdateProfileSuccessRequest = () => ({
+const userUpdateProfileSuccessRequest = (user) => ({
   type: USER_UPDATE_PROFILE_SUCCESS,
+  payload: user,
 });
 
 export const editUser = ({ email, password, name }) => {
@@ -250,16 +279,15 @@ export const editUser = ({ email, password, name }) => {
     editUserRequest(accessToken, email, password, name)
       .then((res) => {
         dispatch(userUpdateProfileSuccessRequest(res.user));
-        const accessToken = res.accessToken.split("Bearer ")[1];
-        const refreshToken = res.refreshToken;
-        setCookie("accessToken", accessToken, {});
-        setCookie("refreshToken", refreshToken, {});
       })
       .catch((error) => {
         if (error.message === "jwt expired") {
-          renewToken();
+          renewTokens().then(() => {
+            dispatch(editUser({ email, password, name }));
+          });
         } else {
-          dispatch(userUpdateProfileErrorRequest(error));
+          console.log(error);
+          dispatch(userUpdateProfileErrorRequest());
         }
       });
   };
