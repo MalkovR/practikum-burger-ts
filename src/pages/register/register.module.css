@@ -1,0 +1,28 @@
+.register_page_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
+  row-gap: 80px;
+}
+
+.register_form {
+  max-width: 480px;
+  text-align: center;
+}
+
+.login {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  row-gap: 24px;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 16px;
+  color: #4c4cff;
+}

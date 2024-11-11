@@ -8,15 +8,14 @@ const NavMenuItem = (props: any) => {
           <props.icon type={props.isActive ? "primary" : "secondary"} />
         </div>
         <div className="ml-1">
-          <a
-            href="#"
+          <p
             className={
               "text text_type_main-small" +
               (props.isActive ? "" : " text_color_inactive")
             }
           >
             {props.name}
-          </a>
+          </p>
         </div>
       </div>
     </>

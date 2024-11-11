@@ -9,8 +9,10 @@ import { getConstructorIngredients } from "../../services/burger-constructor/sel
 import { useDrag } from "react-dnd";
 import PropTypes from "prop-types";
 import { IngredientItemType } from "../../types/types";
+import { Link, useLocation } from "react-router-dom";
 
 const IngredientItem = ({ burgerIngredient }) => {
+  const location = useLocation();
   const { bun, ingredients } = useSelector(getConstructorIngredients);
 
   const counter = useMemo(() => {
@@ -30,22 +32,27 @@ const IngredientItem = ({ burgerIngredient }) => {
   }));
 
   return (
-    <div
-      className={`${style.ingredient_item_container} ${isDragging && style.opacity}`}
-      ref={drag}
+    <Link
+      to={`/ingredients/${burgerIngredient._id}`}
+      state={{ backgroundLocation: location }}
     >
-      <img src={burgerIngredient.image} alt={burgerIngredient.name} />
-      <span className={`${style.price} mt-1 mb-1`}>
-        <p className="text text_type_digits-medium mr-2">
-          {burgerIngredient.price}
-        </p>
-        <CurrencyIcon type="primary" />
-      </span>
-      <span className={`${style.description} text text_type_main-small`}>
-        {burgerIngredient.name}
-      </span>
-      {counter && <Counter count={counter} size="default" extraClass="m-1" />}
-    </div>
+      <div
+        className={`${style.ingredient_item_container} ${isDragging && style.opacity}`}
+        ref={drag}
+      >
+        <img src={burgerIngredient.image} alt={burgerIngredient.name} />
+        <span className={`${style.price} mt-1 mb-1`}>
+          <p className="text text_type_digits-medium mr-2">
+            {burgerIngredient.price}
+          </p>
+          <CurrencyIcon type="primary" />
+        </span>
+        <span className={`${style.description} text text_type_main-small`}>
+          {burgerIngredient.name}
+        </span>
+        {counter && <Counter count={counter} size="default" extraClass="m-1" />}
+      </div>
+    </Link>
   );
 };
 

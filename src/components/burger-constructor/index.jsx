@@ -17,9 +17,12 @@ import { getOrderDetails, resetOrder } from "../../services/order/actions";
 import { resetConstructor } from "../../services/burger-constructor/actions";
 import { useDrop } from "react-dnd";
 import { BurgerConstructorItem } from "../burger-constructor-item/index";
+import { getIsUserLoaded } from "../../services/auth/selectors";
+import { useNavigate } from "react-router-dom";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const { bun, ingredients } = useSelector(getConstructorIngredients);
 
@@ -44,6 +47,13 @@ const BurgerConstructor = () => {
         : dispatch(addIngredient(item));
     },
   }));
+
+  const userLoaded = useSelector(getIsUserLoaded);
+
+  const handleOrder = () => {
+    dispatch(getOrderDetails(getConstructorIds));
+    setOpenModal(true);
+  };
 
   return (
     <>
@@ -112,10 +122,7 @@ const BurgerConstructor = () => {
               htmlType="button"
               type="primary"
               size="medium"
-              onClick={() => {
-                dispatch(getOrderDetails(getConstructorIds));
-                setOpenModal(true);
-              }}
+              onClick={userLoaded ? handleOrder : () => navigate("/login")}
               disabled={!bun}
             >
               Оформить заказ

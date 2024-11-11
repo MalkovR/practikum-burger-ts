@@ -5,9 +5,6 @@ import BurgerIngredientsList from "../burger-ingredients-list";
 import { useDispatch, useSelector } from "react-redux";
 import { getBurgerIngredients } from "../../services/burger-ingredients/selectors";
 import { getSelectedIngredient } from "../../services/selected-ingredient/selectors";
-import { resetIngredientsDetails } from "../../services/selected-ingredient/actions";
-import Modal from "../modal";
-import IngredientDetails from "../ingredient-details";
 
 const BurgerIngredients = () => {
   const dispatch = useDispatch();
@@ -93,14 +90,6 @@ const BurgerIngredients = () => {
           </div>
         </div>
       </div>
-      {selectedIngredient && (
-        <Modal
-          title="Детали ингредиента"
-          onClose={() => dispatch(resetIngredientsDetails())}
-        >
-          <IngredientDetails burgerIngredient={selectedIngredient} />
-        </Modal>
-      )}
     </>
   );
 };
