@@ -1,16 +1,15 @@
-import React, {useRef, useState} from "react";
-import style from "./register.module.css";
+import {SyntheticEvent, useRef, useState} from "react";
+import style from "./login.module.css";
 import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link} from "react-router-dom";
+import {login} from "../../services/auth/actions";
 import {useDispatch} from "react-redux";
-import {register} from "../../services/auth/actions";
 
-const Register = () => {
+export const Login = () => {
   const dispatch = useDispatch();
-  const passwordRef = useRef(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
   const hidePassword = () => {
@@ -24,25 +23,17 @@ const Register = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(register({ email: email, password: password, name: username }));
+    // @ts-ignore
+    dispatch(login({ email: email, password: password }));
   };
 
   return (
-    <div className={style.register_page_container}>
-      <div className={style.register_form}>
-        <h2 className="text text_type_main-medium mb-4">Регистрация</h2>
-        <form name="register" className={style.login} onSubmit={handleSubmit}>
-          <Input
-            type={"text"}
-            placeholder={"Имя"}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            name={"username"}
-            errorText={"Ошибка"}
-            size={"default"}
-          />
+    <div className={style.login_page_container}>
+      <div className={style.login_form}>
+        <h2 className="text text_type_main-medium mb-4">Вход</h2>
+        <form name="login" className={style.login} onSubmit={handleSubmit}>
           <Input
             type={"email"}
             placeholder={"E-mail"}
@@ -66,18 +57,24 @@ const Register = () => {
           />
 
           <Button htmlType="submit" type="primary" size="medium">
-            Зарегистрироваться
+            Войти
           </Button>
         </form>
       </div>
-      <p className={"text text_type_main-default text_color_inactive"}>
-        Уже зарегистрированы?&nbsp;
-        <Link to="/login" className={style.link}>
-          Войти
-        </Link>
-      </p>
+      <div>
+        <p className={"text text_type_main-default text_color_inactive"}>
+          Вы - новый пользователь?&nbsp;
+          <Link to="/register" className={style.link}>
+            Зарегистрироваться
+          </Link>
+        </p>
+        <p className={"text text_type_main-default text_color_inactive"}>
+          Забыли пароль?&nbsp;
+          <Link to="/forgot-password" className={style.link}>
+            Восстановить пароль
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };
-
-export default Register;

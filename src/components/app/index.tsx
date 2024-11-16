@@ -1,11 +1,11 @@
 import style from "./app.module.css";
 import {AppHeader} from "../app-header";
 import {Burgers} from "../burgers";
-import Login from "../../pages/login";
-import Register from "../../pages/register";
-import ForgotPassword from "../../pages/forgot-password";
-import ResetPassword from "../../pages/reset-password";
-import Profile from "../../pages/profile";
+import {Login} from "../../pages/login";
+import {Register} from "../../pages/register";
+import {ForgotPassword} from "../../pages/forgot-password";
+import {ResetPassword} from "../../pages/reset-password";
+import {Profile} from "../../pages/profile";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";

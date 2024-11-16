@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
+import {ChangeEvent, SyntheticEvent, useEffect, useState} from "react";
 import style from "./profile-form.module.css";
 import {Button, EmailInput, Input, PasswordInput,} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserData} from "../../../services/auth/selectors";
 import {editUser} from "../../../services/auth/actions";
 
-const ProfileForm = () => {
+export const ProfileForm = () => {
   const dispatch = useDispatch();
   const authData = useSelector(getUserData);
   const [data, setData] = useState({
@@ -26,7 +26,7 @@ const ProfileForm = () => {
     }
   }, [authData]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setButtonActive(true);
     const { name, value } = e.target;
     setData({
@@ -35,8 +35,9 @@ const ProfileForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    // @ts-ignore
     dispatch(editUser(data));
     setButtonActive(false);
   };
@@ -66,16 +67,14 @@ const ProfileForm = () => {
           icon={"EditIcon"}
         />
         <EmailInput
-          type={"email"}
           placeholder={"Логин"}
           onChange={handleChange}
           value={data.email}
           name={"email"}
           size="default"
-          icon={"EditIcon"}
+          isIcon={true}
         />
         <PasswordInput
-          type={"password"}
           placeholder="Пароль"
           onChange={handleChange}
           value={data.password}
@@ -106,5 +105,3 @@ const ProfileForm = () => {
     </div>
   );
 };
-
-export default ProfileForm;
