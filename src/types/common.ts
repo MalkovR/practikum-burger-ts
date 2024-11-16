@@ -1,8 +1,8 @@
-export default interface IBurgerIngredients {
-  burgerIngredients: IBurgerIngredient[];
-}
+export type TBurgerIngredients = {
+  burgerIngredients: Array<TBurgerIngredient>;
+};
 
-export interface IBurgerIngredient {
+export type TBurgerIngredient = {
   _id: string;
   name: string;
   type: string;
@@ -15,4 +15,6 @@ export interface IBurgerIngredient {
   image_mobile: string;
   image_large: string;
   __v: number;
-}
+};
+
+export type TBurgerIngredientWithUuid = TBurgerIngredient & { uuid: string };

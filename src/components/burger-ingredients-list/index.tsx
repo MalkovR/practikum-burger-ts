@@ -1,12 +1,16 @@
-import React from "react";
-import IngredientItem from "../ingredient-item";
+import {IngredientItem} from "../ingredient-item";
 import {useDispatch} from "react-redux";
 import {getIngredientsDetails} from "../../services/selected-ingredient/actions";
 import style from "./burger-ingredients-list.module.css";
-import {IngredientItemType} from "../../types/types";
-import PropTypes from "prop-types";
+import {TBurgerIngredient} from "../../types/common.ts";
 
-const BurgerIngredientsList = ({ items }) => {
+type TBurgerIngredientsListProps = {
+  items: Array<TBurgerIngredient>;
+};
+
+export const BurgerIngredientsList = ({
+  items,
+}: TBurgerIngredientsListProps) => {
   const dispatch = useDispatch();
 
   return (
@@ -14,6 +18,7 @@ const BurgerIngredientsList = ({ items }) => {
       {items.map((item) => (
         <div
           key={item._id}
+          // @ts-ignore
           onClick={() => dispatch(getIngredientsDetails(item))}
         >
           <IngredientItem burgerIngredient={item} />
@@ -21,10 +26,4 @@ const BurgerIngredientsList = ({ items }) => {
       ))}
     </div>
   );
-};
-
-export default BurgerIngredientsList;
-
-BurgerIngredientsList.propTypes = {
-  items: PropTypes.arrayOf(IngredientItemType).isRequired,
 };

@@ -1,13 +1,17 @@
 import {Counter, CurrencyIcon,} from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./ingredient-item.module.css";
-import React, {useMemo} from "react";
+import {useMemo} from "react";
 import {useSelector} from "react-redux";
 import {getConstructorIngredients} from "../../services/burger-constructor/selectors";
 import {useDrag} from "react-dnd";
-import {IngredientItemType} from "../../types/types";
 import {Link, useLocation} from "react-router-dom";
+import {TBurgerIngredient} from "../../types/common.ts";
 
-const IngredientItem = ({ burgerIngredient }) => {
+type TIngredientItemProps = {
+  burgerIngredient: TBurgerIngredient;
+};
+
+export const IngredientItem = ({ burgerIngredient }: TIngredientItemProps) => {
   const location = useLocation();
   const { bun, ingredients } = useSelector(getConstructorIngredients);
 
@@ -15,8 +19,9 @@ const IngredientItem = ({ burgerIngredient }) => {
     if (burgerIngredient.type === "bun") {
       return bun?._id === burgerIngredient._id ? 2 : 0;
     }
-    return ingredients.filter((item) => item._id === burgerIngredient._id)
-      .length;
+    return ingredients.filter(
+      (item: TBurgerIngredient) => item._id === burgerIngredient._id,
+    ).length;
   }, [bun, ingredients]);
 
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -51,9 +56,3 @@ const IngredientItem = ({ burgerIngredient }) => {
     </Link>
   );
 };
-
-IngredientItem.propTypes = {
-  burgerIngredient: IngredientItemType.isRequired,
-};
-
-export default IngredientItem;

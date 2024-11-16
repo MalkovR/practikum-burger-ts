@@ -1,17 +1,36 @@
-import React, {useRef} from "react";
+import {useRef} from "react";
 import {ConstructorElement, DragIcon,} from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-constructor.module.css";
-import {useDrag, useDrop} from "react-dnd";
+import {useDrag, useDrop, XYCoord} from "react-dnd";
 import {useDispatch} from "react-redux";
 import {moveIngredient, removeIngredient,} from "../../services/burger-constructor/actions";
-import PropTypes from "prop-types";
-import {IngredientItemType} from "../../types/types";
+import {TBurgerIngredientWithUuid} from "../../types/common.ts";
 
-const BurgerConstructorItem = ({ id, index, item }) => {
+type TBurgerConstructorItemProps = {
+  id: string;
+  index: number;
+  item: TBurgerIngredientWithUuid;
+};
+
+type TDropItem = {
+  index: number;
+  type: string;
+  id: string;
+};
+
+export const BurgerConstructorItem = ({
+  id,
+  index,
+  item,
+}: TBurgerConstructorItemProps) => {
   const dispatch = useDispatch();
 
-  const ref = useRef(null);
-  const [{ handlerId }, drop] = useDrop({
+  const ref = useRef<HTMLDivElement>(null);
+  const [, drop] = useDrop<
+    TDropItem,
+    unknown,
+    { handlerId: string | symbol | null }
+  >({
     accept: "constructor",
     collect(monitor) {
       return {
@@ -32,7 +51,7 @@ const BurgerConstructorItem = ({ id, index, item }) => {
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
@@ -67,16 +86,9 @@ const BurgerConstructorItem = ({ id, index, item }) => {
         text={item.name}
         price={item.price}
         thumbnail={item.image_mobile}
+        // @ts-ignore
         handleClose={() => dispatch(removeIngredient(item.uuid))}
       />
     </div>
   );
 };
-
-BurgerConstructorItem.propTypes = {
-  id: PropTypes.string,
-  index: PropTypes.number,
-  item: IngredientItemType.isRequired,
-};
-
-export { BurgerConstructorItem };

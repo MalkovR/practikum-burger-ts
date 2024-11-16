@@ -1,6 +1,6 @@
 import style from "./app.module.css";
-import AppHeader from "../app-header";
-import Burgers from "../burgers";
+import {AppHeader} from "../app-header";
+import {Burgers} from "../burgers";
 import Login from "../../pages/login";
 import Register from "../../pages/register";
 import ForgotPassword from "../../pages/forgot-password";
@@ -9,14 +9,14 @@ import Profile from "../../pages/profile";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
-import {OnlyAuth, OnlyUnAuth,} from "../protected-route-element/protected-route-element";
+import {OnlyAuth, OnlyUnAuth,} from "../protected-route-element/protected-route-element.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {checkUserAuth} from "../../services/auth/actions";
-import IngredientDetails from "../ingredient-details";
+import {IngredientDetails} from "../ingredient-details";
 import {getBurgerIngredientsAll} from "../../services/burger-ingredients/selectors";
 import {getIngredients} from "../../services/burger-ingredients/actions";
-import Modal from "../modal";
+import {Modal} from "../modal";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +25,9 @@ function App() {
   const { loading, error, ingredients } = useSelector(getBurgerIngredientsAll);
 
   useEffect(() => {
+    // @ts-ignore
     dispatch(getIngredients());
+    // @ts-ignore
     dispatch(checkUserAuth());
   }, [dispatch]);
 
@@ -48,30 +50,22 @@ function App() {
       <DndProvider backend={HTML5Backend}>
         <AppHeader />
         <Routes location={backgroundState || location}>
-          <Route exact path="/" element={<Burgers />} />
+          <Route path="/" element={<Burgers />} />
           <Route path="ingredients/:id" element={<IngredientDetails />} />
+          <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
           <Route
-            exact
-            path="/login"
-            element={<OnlyUnAuth component={<Login />} />}
-          />
-          <Route
-            exact
             path="/register"
             element={<OnlyUnAuth component={<Register />} />}
           />
           <Route
-            exact
             path="/forgot-password"
             element={<OnlyUnAuth component={<ForgotPassword />} />}
           />
           <Route
-            exact
             path="/reset-password"
             element={<OnlyUnAuth component={<ResetPassword />} />}
           />
           <Route
-            exact
             path="/profile"
             element={<OnlyAuth component={<Profile />} />}
           />

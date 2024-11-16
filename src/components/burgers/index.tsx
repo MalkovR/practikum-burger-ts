@@ -1,8 +1,8 @@
 import style from "./burgers.module.css";
-import BurgerIngredients from "../burger-ingredients";
-import BurgerConstructor from "../burger-constructor";
+import {BurgerIngredients} from "../burger-ingredients";
+import {BurgerConstructor} from "../burger-constructor";
 
-const Burgers = () => {
+export const Burgers = () => {
   return (
     <div className={style.burgers_container}>
       <BurgerIngredients />
@@ -10,5 +10,3 @@ const Burgers = () => {
     </div>
   );
 };
-
-export default Burgers;

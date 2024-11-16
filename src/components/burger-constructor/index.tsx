@@ -1,18 +1,19 @@
-import React, {useMemo, useState} from "react";
+import {useMemo, useState} from "react";
 import {Button, ConstructorElement, CurrencyIcon,} from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-constructor.module.css";
-import Modal from "../modal";
-import OrderDetails from "../order-details";
+import {Modal} from "../modal";
+import {OrderDetails} from "../order-details";
 import {useDispatch, useSelector} from "react-redux";
 import {getConstructorIngredients} from "../../services/burger-constructor/selectors";
 import {addBun, addIngredient, resetConstructor,} from "../../services/burger-constructor/actions";
 import {getOrderDetails, resetOrder} from "../../services/order/actions";
 import {useDrop} from "react-dnd";
-import {BurgerConstructorItem} from "../burger-constructor-item/index";
+import {BurgerConstructorItem} from "../burger-constructor-item";
 import {getIsUserLoaded} from "../../services/auth/selectors";
 import {useNavigate} from "react-router-dom";
+import {TBurgerIngredient, TBurgerIngredientWithUuid,} from "../../types/common.ts";
 
-const BurgerConstructor = () => {
+export const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
@@ -20,29 +21,42 @@ const BurgerConstructor = () => {
 
   const getConstructorIds = useMemo(() => {
     return bun
-      ? [bun._id, ...ingredients.map((item) => item._id), bun._id]
-      : ingredients.map((item) => item._id);
+      ? [
+          bun._id,
+          ...ingredients.map((item: TBurgerIngredient) => item._id),
+          bun._id,
+        ]
+      : ingredients.map((item: TBurgerIngredient) => item._id);
   }, [bun, ingredients]);
 
   const totalPrice = useMemo(() => {
     return bun
       ? bun.price * 2 +
-          ingredients.reduce((summa, item) => summa + item.price, 0)
-      : ingredients.reduce((summa, item) => summa + item.price, 0);
+          ingredients.reduce(
+            (summa: number, item: TBurgerIngredient) => summa + item.price,
+            0,
+          )
+      : ingredients.reduce(
+          (summa: number, item: TBurgerIngredient) => summa + item.price,
+          0,
+        );
   }, [bun, ingredients]);
 
   const [, drop] = useDrop(() => ({
     accept: "ingredient",
-    drop(item) {
+    drop(item: TBurgerIngredient) {
       item.type === "bun"
-        ? dispatch(addBun(item))
-        : dispatch(addIngredient(item));
+        ? // @ts-ignore
+          dispatch(addBun(item))
+        : // @ts-ignore
+          dispatch(addIngredient(item));
     },
   }));
 
   const userLoaded = useSelector(getIsUserLoaded);
 
   const handleOrder = () => {
+    // @ts-ignore
     dispatch(getOrderDetails(getConstructorIds));
     setOpenModal(true);
   };
@@ -71,14 +85,16 @@ const BurgerConstructor = () => {
             )}
             {ingredients.length ? (
               <div className={style.elements_list}>
-                {ingredients.map((item, index) => (
-                  <BurgerConstructorItem
-                    key={item.uuid}
-                    id={item.uuid}
-                    index={index}
-                    item={item}
-                  />
-                ))}
+                {ingredients.map(
+                  (item: TBurgerIngredientWithUuid, index: number) => (
+                    <BurgerConstructorItem
+                      key={item.uuid}
+                      id={item.uuid}
+                      index={index}
+                      item={item}
+                    />
+                  ),
+                )}
               </div>
             ) : (
               <div className={`constructor-element ${style.align_center}`}>
@@ -136,5 +152,3 @@ const BurgerConstructor = () => {
     </>
   );
 };
-
-export default BurgerConstructor;
