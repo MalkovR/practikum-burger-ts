@@ -7,7 +7,7 @@ import {
     renewTokenRequest,
 } from "../../utils/burger-api";
 
-import {deleteCookie, getCookie, setCookie} from "../../utils/cookie";
+import {deleteCookie, getCookie, setCookie} from "../../utils/cookie.ts";
 
 export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
 
@@ -85,7 +85,7 @@ const userRegisterSuccessRequest = (user) => ({
 export const register = ({ email, password, name }) => {
   return (dispatch) => {
     dispatch(userRegisterRequest());
-    registerRequest(email, password, name)
+    registerRequest({email, password, name})
       .then((res) => {
         const accessToken = res.accessToken.split("Bearer ")[1];
         const refreshToken = res.refreshToken;
@@ -121,8 +121,6 @@ export const renewToken = () => {
     const refreshToken = localStorage.getItem("refreshToken");
     renewTokenRequest(refreshToken)
       .then((res) => {
-        // deleteCookie("accessToken");
-        // localStorage.removeItem("refreshToken");
         const accessToken = res.accessToken.split("Bearer ")[1];
         const refreshToken = res.refreshToken;
         setCookie("accessToken", accessToken, {});
@@ -171,7 +169,7 @@ const userLoginSuccessRequest = (user) => ({
 export const login = ({ email, password }) => {
   return (dispatch) => {
     dispatch(userLoginRequest());
-    loginRequest(email, password)
+    loginRequest({email, password})
       .then((res) => {
         const accessToken = res.accessToken.split("Bearer ")[1];
         const refreshToken = res.refreshToken;
@@ -207,9 +205,9 @@ export const logout = () => {
     const refreshToken = localStorage.getItem("refreshToken");
     logoutRequest(refreshToken)
       .then(() => {
-        dispatch(userLogoutSuccessRequest());
         localStorage.removeItem("refreshToken");
         deleteCookie("accessToken");
+        dispatch(userLogoutSuccessRequest());
       })
       .catch((error) => {
         dispatch(userLogoutErrorRequest(error));
@@ -274,7 +272,7 @@ export const editUser = ({ email, password, name }) => {
     dispatch(userUpdateProfileRequest());
 
     const accessToken = "Bearer " + getCookie("accessToken");
-    editUserRequest(accessToken, email, password, name)
+    editUserRequest({accessToken, email, password, name})
       .then((res) => {
         dispatch(userUpdateProfileSuccessRequest(res.user));
       })
