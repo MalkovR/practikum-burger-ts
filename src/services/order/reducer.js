@@ -1,9 +1,4 @@
-import {
-  POST_ORDER,
-  POST_ORDER_SUCCESS,
-  POST_ORDER_ERROR,
-  RESET_ORDER,
-} from "./actions";
+import {POST_ORDER, POST_ORDER_ERROR, POST_ORDER_SUCCESS, RESET_ORDER,} from "./actions";
 
 const initialState = {
   order: null,

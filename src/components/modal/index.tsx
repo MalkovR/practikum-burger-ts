@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { createPortal } from "react-dom";
+import React, {useEffect} from "react";
+import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {createPortal} from "react-dom";
 import style from "./modal.module.css";
 import ModalOverlay from "../modal-overlay";
 

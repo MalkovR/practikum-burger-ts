@@ -1,8 +1,4 @@
-import {
-  INGREDIENTS_LOADING,
-  INGREDIENTS_LOAD_SUCCESS,
-  INGREDIENTS_LOAD_ERROR,
-} from "./actions";
+import {INGREDIENTS_LOAD_ERROR, INGREDIENTS_LOAD_SUCCESS, INGREDIENTS_LOADING,} from "./actions";
 
 const initialState = {
   ingredients: [],

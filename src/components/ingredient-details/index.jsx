@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import style from "./ingredient-details.module.css";
 import PropTypes from "prop-types";
-import { IngredientItemType } from "../../types/types";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getBurgerIngredients } from "../../services/burger-ingredients/selectors";
-import { getSelectedIngredient } from "../../services/selected-ingredient/selectors";
-import { getIngredientsDetails } from "../../services/selected-ingredient/actions";
+import {useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {getBurgerIngredients} from "../../services/burger-ingredients/selectors";
+import {getSelectedIngredient} from "../../services/selected-ingredient/selectors";
+import {getIngredientsDetails} from "../../services/selected-ingredient/actions";
 
 const Description = ({ title, count }) => (
   <div className={style.description}>

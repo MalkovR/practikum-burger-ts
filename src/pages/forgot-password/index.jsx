@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import style from "./forgot-password.module.css";
-import {
-  Input,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { forgotPasswordRequest } from "../../utils/burger-api";
-import { useNavigate } from "react-router-dom";
+import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Link, useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {forgotPasswordRequest} from "../../utils/burger-api";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();

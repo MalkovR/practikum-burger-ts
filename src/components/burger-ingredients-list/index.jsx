@@ -1,9 +1,9 @@
 import React from "react";
 import IngredientItem from "../ingredient-item";
-import { useDispatch } from "react-redux";
-import { getIngredientsDetails } from "../../services/selected-ingredient/actions";
+import {useDispatch} from "react-redux";
+import {getIngredientsDetails} from "../../services/selected-ingredient/actions";
 import style from "./burger-ingredients-list.module.css";
-import { IngredientItemType } from "../../types/types";
+import {IngredientItemType} from "../../types/types";
 import PropTypes from "prop-types";
 
 const BurgerIngredientsList = ({ items }) => {

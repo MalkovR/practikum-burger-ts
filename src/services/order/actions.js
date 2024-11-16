@@ -1,5 +1,4 @@
-import { getOrderData } from "../../utils/burger-api";
-import { resetConstructor } from "../burger-constructor/actions";
+import {getOrderData} from "../../utils/burger-api";
 
 export const POST_ORDER = "POST_ORDER";
 export const POST_ORDER_SUCCESS = "POST_ORDER_SUCCESS";

@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import style from "./profile-form.module.css";
-import {
-  Input,
-  EmailInput,
-  PasswordInput,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserData } from "../../../services/auth/selectors";
-import { editUser } from "../../../services/auth/actions";
+import {Button, EmailInput, Input, PasswordInput,} from "@ya.praktikum/react-developer-burger-ui-components";
+import {useDispatch, useSelector} from "react-redux";
+import {getUserData} from "../../../services/auth/selectors";
+import {editUser} from "../../../services/auth/actions";
 
 const ProfileForm = () => {
   const dispatch = useDispatch();

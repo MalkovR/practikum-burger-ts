@@ -1,9 +1,6 @@
-import { useSelector } from "react-redux";
-import { Navigate, useLocation } from "react-router-dom";
-import {
-  getUserAuthChecked,
-  getIsUserLoaded,
-} from "../../services/auth/selectors";
+import {useSelector} from "react-redux";
+import {Navigate, useLocation} from "react-router-dom";
+import {getIsUserLoaded, getUserAuthChecked,} from "../../services/auth/selectors";
 
 const ProtectedRouteElement = ({ onlyUnAuth = false, component }) => {
   const isAuthChecked = useSelector(getUserAuthChecked);

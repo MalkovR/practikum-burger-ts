@@ -1,4 +1,4 @@
-import { getIngredientData } from "../../utils/burger-api";
+import {getIngredientData} from "../../utils/burger-api";
 
 export const INGREDIENTS_LOADING = "INGREDIENTS_LOADING";
 export const INGREDIENTS_LOAD_ERROR = "INGREDIENTS_LOAD_ERROR";

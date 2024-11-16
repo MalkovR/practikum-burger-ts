@@ -6,21 +6,16 @@ import Register from "../../pages/register";
 import ForgotPassword from "../../pages/forgot-password";
 import ResetPassword from "../../pages/reset-password";
 import Profile from "../../pages/profile";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import {
-  OnlyAuth,
-  OnlyUnAuth,
-} from "../protected-route-element/protected-route-element";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { checkUserAuth } from "../../services/auth/actions";
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {OnlyAuth, OnlyUnAuth,} from "../protected-route-element/protected-route-element";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {checkUserAuth} from "../../services/auth/actions";
 import IngredientDetails from "../ingredient-details";
-import { getBurgerIngredientsAll } from "../../services/burger-ingredients/selectors";
-import { getIngredients } from "../../services/burger-ingredients/actions";
-import { useLocation } from "react-router-dom";
-import { resetIngredientsDetails } from "../../services/selected-ingredient/actions";
+import {getBurgerIngredientsAll} from "../../services/burger-ingredients/selectors";
+import {getIngredients} from "../../services/burger-ingredients/actions";
 import Modal from "../modal";
 
 function App() {

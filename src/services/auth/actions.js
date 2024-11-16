@@ -1,15 +1,13 @@
 import {
-  loginRequest,
-  logoutRequest,
-  registerRequest,
-  renewTokenRequest,
-  getUserRequest,
-  editUserRequest,
-  forgotPasswordRequest,
-  resetPasswordRequest,
+    editUserRequest,
+    getUserRequest,
+    loginRequest,
+    logoutRequest,
+    registerRequest,
+    renewTokenRequest,
 } from "../../utils/burger-api";
 
-import { setCookie, getCookie, deleteCookie } from "../../utils/cookie";
+import {deleteCookie, getCookie, setCookie} from "../../utils/cookie";
 
 export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
 

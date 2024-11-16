@@ -1,15 +1,11 @@
-import {
-  Counter,
-  CurrencyIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Counter, CurrencyIcon,} from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./ingredient-item.module.css";
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { getConstructorIngredients } from "../../services/burger-constructor/selectors";
-import { useDrag } from "react-dnd";
-import PropTypes from "prop-types";
-import { IngredientItemType } from "../../types/types";
-import { Link, useLocation } from "react-router-dom";
+import React, {useMemo} from "react";
+import {useSelector} from "react-redux";
+import {getConstructorIngredients} from "../../services/burger-constructor/selectors";
+import {useDrag} from "react-dnd";
+import {IngredientItemType} from "../../types/types";
+import {Link, useLocation} from "react-router-dom";
 
 const IngredientItem = ({ burgerIngredient }) => {
   const location = useLocation();

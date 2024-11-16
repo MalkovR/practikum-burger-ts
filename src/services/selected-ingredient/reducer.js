@@ -1,4 +1,4 @@
-import { GET_INGREDIENT_DETAILS, RESET_INGREDIENT_DETAILS } from "./actions";
+import {GET_INGREDIENT_DETAILS, RESET_INGREDIENT_DETAILS} from "./actions";
 
 const initialState = {
   selectedIngredient: null,

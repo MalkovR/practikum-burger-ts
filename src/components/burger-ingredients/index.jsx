@@ -1,10 +1,10 @@
-import React, { useState, useRef, useMemo } from "react";
-import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import React, {useMemo, useRef, useState} from "react";
+import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-ingredients.module.css";
 import BurgerIngredientsList from "../burger-ingredients-list";
-import { useDispatch, useSelector } from "react-redux";
-import { getBurgerIngredients } from "../../services/burger-ingredients/selectors";
-import { getSelectedIngredient } from "../../services/selected-ingredient/selectors";
+import {useDispatch, useSelector} from "react-redux";
+import {getBurgerIngredients} from "../../services/burger-ingredients/selectors";
+import {getSelectedIngredient} from "../../services/selected-ingredient/selectors";
 
 const BurgerIngredients = () => {
   const dispatch = useDispatch();

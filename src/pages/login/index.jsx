@@ -1,12 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, {useRef, useState} from "react";
 import style from "./login.module.css";
-import {
-  Input,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
-import { login } from "../../services/auth/actions";
-import { useDispatch } from "react-redux";
+import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Link} from "react-router-dom";
+import {login} from "../../services/auth/actions";
+import {useDispatch} from "react-redux";
 
 const Login = () => {
   const dispatch = useDispatch();

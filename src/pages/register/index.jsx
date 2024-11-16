@@ -1,12 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, {useRef, useState} from "react";
 import style from "./register.module.css";
-import {
-  Input,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { register } from "../../services/auth/actions";
+import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {register} from "../../services/auth/actions";
 
 const Register = () => {
   const dispatch = useDispatch();

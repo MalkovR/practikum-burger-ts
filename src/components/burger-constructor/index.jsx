@@ -1,24 +1,16 @@
-import React, { useMemo, useState } from "react";
-import {
-  ConstructorElement,
-  CurrencyIcon,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import React, {useMemo, useState} from "react";
+import {Button, ConstructorElement, CurrencyIcon,} from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-constructor.module.css";
 import Modal from "../modal";
 import OrderDetails from "../order-details";
-import { useDispatch, useSelector } from "react-redux";
-import { getConstructorIngredients } from "../../services/burger-constructor/selectors";
-import {
-  addBun,
-  addIngredient,
-} from "../../services/burger-constructor/actions";
-import { getOrderDetails, resetOrder } from "../../services/order/actions";
-import { resetConstructor } from "../../services/burger-constructor/actions";
-import { useDrop } from "react-dnd";
-import { BurgerConstructorItem } from "../burger-constructor-item/index";
-import { getIsUserLoaded } from "../../services/auth/selectors";
-import { useNavigate } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {getConstructorIngredients} from "../../services/burger-constructor/selectors";
+import {addBun, addIngredient, resetConstructor,} from "../../services/burger-constructor/actions";
+import {getOrderDetails, resetOrder} from "../../services/order/actions";
+import {useDrop} from "react-dnd";
+import {BurgerConstructorItem} from "../burger-constructor-item/index";
+import {getIsUserLoaded} from "../../services/auth/selectors";
+import {useNavigate} from "react-router-dom";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();

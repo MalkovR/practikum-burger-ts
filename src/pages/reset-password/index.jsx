@@ -1,12 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, {useRef, useState} from "react";
 import style from "./reset-password.module.css";
-import {
-  Input,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
-import { resetPasswordRequest } from "../../utils/burger-api";
+import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import {resetPasswordRequest} from "../../utils/burger-api";
 
 const ResetPassword = () => {
   const navigate = useNavigate();

@@ -1,12 +1,7 @@
 import style from "./app-header.module.css";
-import {
-  Logo,
-  BurgerIcon,
-  ListIcon,
-  ProfileIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import {BurgerIcon, ListIcon, Logo, ProfileIcon,} from "@ya.praktikum/react-developer-burger-ui-components";
 import NavMenuItem from "../nav-menu-item";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const AppHeader = () => {
   return (

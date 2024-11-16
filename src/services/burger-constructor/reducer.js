@@ -1,10 +1,4 @@
-import {
-  ADD_INGREDIENT,
-  REMOVE_INGREDIENT,
-  ADD_BUN,
-  RESET_CONSTRUCTOR,
-  MOVE_INGREDIENT,
-} from "./actions";
+import {ADD_BUN, ADD_INGREDIENT, MOVE_INGREDIENT, REMOVE_INGREDIENT, RESET_CONSTRUCTOR,} from "./actions";
 
 const initialState = {
   bun: null,

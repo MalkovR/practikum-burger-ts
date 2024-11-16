@@ -1,24 +1,11 @@
-import React, { useMemo, useState, useRef } from "react";
-import {
-  ConstructorElement,
-  DragIcon,
-  CurrencyIcon,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import React, {useRef} from "react";
+import {ConstructorElement, DragIcon,} from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-constructor.module.css";
-import { useDrop, useDrag } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  resetConstructor,
-  moveIngredient,
-} from "../../services/burger-constructor/actions";
-import {
-  removeIngredient,
-  addBun,
-  addIngredient,
-} from "../../services/burger-constructor/actions";
+import {useDrag, useDrop} from "react-dnd";
+import {useDispatch} from "react-redux";
+import {moveIngredient, removeIngredient,} from "../../services/burger-constructor/actions";
 import PropTypes from "prop-types";
-import { IngredientItemType } from "../../types/types";
+import {IngredientItemType} from "../../types/types";
 
 const BurgerConstructorItem = ({ id, index, item }) => {
   const dispatch = useDispatch();
