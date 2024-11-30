@@ -1,4 +1,4 @@
-import {SyntheticEvent, useState} from "react";
+import {FormEvent, useState} from "react";
 import style from "./forgot-password.module.css";
 import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useNavigate} from "react-router-dom";
@@ -8,7 +8,7 @@ export const ForgotPassword = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
-  const onSubmit = (e: SyntheticEvent) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     forgotPasswordRequest(email);
     navigate("/reset-password", { state: { resetPassword: true } });

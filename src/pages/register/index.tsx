@@ -1,4 +1,4 @@
-import {SyntheticEvent, useRef, useState} from "react";
+import {FormEvent, useRef, useState} from "react";
 import style from "./register.module.css";
 import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link} from "react-router-dom";
@@ -24,7 +24,7 @@ export const Register = () => {
     }
   };
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // @ts-ignore
     dispatch(register({ email: email, password: password, name: username }));
