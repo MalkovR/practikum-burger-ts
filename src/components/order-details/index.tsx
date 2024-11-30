@@ -1,6 +1,6 @@
 import {CheckMarkIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./order-details.module.css";
-import {useSelector} from "react-redux";
+import {useSelector} from "../../services/store";
 import {getOrderDetails} from "../../services/order/selectors";
 
 export const OrderDetails = () => {
@@ -16,7 +16,7 @@ export const OrderDetails = () => {
 
   return (
     <div className={`${style.order_container}`}>
-      <div className="text text_type_digits-large">{order.number}</div>
+      <div className="text text_type_digits-large">{order?.number}</div>
       <div className="text text_type_main-medium pt-8">
         идентификатор заказа
       </div>

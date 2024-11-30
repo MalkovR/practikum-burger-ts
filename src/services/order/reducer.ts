@@ -1,12 +1,24 @@
-import {POST_ORDER, POST_ORDER_ERROR, POST_ORDER_SUCCESS, RESET_ORDER,} from "./actions";
+import {POST_ORDER, POST_ORDER_ERROR, POST_ORDER_SUCCESS, RESET_ORDER, TOrderActions} from "./actions";
 
-const initialState = {
-  order: null,
+export type TOrderState = {
+  success: boolean,
+  name: string | null,
+  order: {
+    number: number | null
+  },
+  loading: boolean,
+  error: null | string,
+}
+
+const initialState: TOrderState = {
+  success: true,
+  name: null,
+  order: {number: null},
   loading: false,
   error: null,
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action: TOrderActions) => {
   switch (action.type) {
     case POST_ORDER:
       return {
@@ -14,10 +26,13 @@ export const reducer = (state = initialState, action) => {
         loading: true,
       };
     case POST_ORDER_SUCCESS: {
+      const {order: {number}} = action.payload
       return {
         ...state,
         loading: false,
-        order: action.payload,
+        order: {
+          number: number
+        },
       };
     }
     case POST_ORDER_ERROR: {
