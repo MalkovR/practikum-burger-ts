@@ -18,9 +18,22 @@ import {
     USER_UPDATE_PROFILE_ERROR,
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS,
-} from "./actions";
+    TAuthActions
+} from "./actions.js";
 
-const initialState = {
+
+export type TAuthState = {
+  user: {
+    email: string,
+    name: string,
+  },
+  isUserLoaded: boolean,
+  isAuthChecked: boolean,
+  loading: boolean,
+  error: null | string,
+}
+
+const initialState: TAuthState = {
   user: {
     email: "",
     name: "",
@@ -31,7 +44,7 @@ const initialState = {
   error: null,
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action: TAuthActions) => {
   switch (action.type) {
     case USER_REGISTER_REQUEST:
       return {

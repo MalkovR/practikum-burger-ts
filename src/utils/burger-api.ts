@@ -9,12 +9,7 @@ import {
   RESET_PASSWORD_URL,
   USER_URL,
 } from "../const";
-
-type TUser = {
-  email: string;
-  name: string;
-  password: string;
-};
+import {TUser} from "../types/common.ts";
 
 // общие проверки
 

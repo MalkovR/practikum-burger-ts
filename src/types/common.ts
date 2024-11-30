@@ -18,3 +18,9 @@ export type TBurgerIngredient = {
 };
 
 export type TBurgerIngredientWithUuid = TBurgerIngredient & { uuid: string };
+
+export type TUser = {
+  email: string;
+  name: string;
+  password?: string;
+};
