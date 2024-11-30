@@ -1,14 +1,12 @@
-import React, {useRef, useState} from "react";
+import {FormEvent, useRef, useState} from "react";
 import style from "./reset-password.module.css";
 import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {resetPasswordRequest} from "../../utils/burger-api";
 
-const ResetPassword = () => {
+export const ResetPassword = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const passwordRef = useRef(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
@@ -24,7 +22,7 @@ const ResetPassword = () => {
     }
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     resetPasswordRequest(password, token);
     navigate("/login", { state: { resetPassword: false } });
@@ -73,5 +71,3 @@ const ResetPassword = () => {
     </div>
   );
 };
-
-export default ResetPassword;

@@ -1,14 +1,15 @@
-import React from "react";
+import {MouseEvent} from "react";
 import style from "./profile-navigation.module.css";
 import {NavLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {logout} from "../../../services/auth/actions";
 
-const ProfileNavigation = () => {
+export const ProfileNavigation = () => {
   const dispatch = useDispatch();
 
-  const handleLogout = (e) => {
+  const handleLogout = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
+    // @ts-ignore
     dispatch(logout());
   };
 
@@ -39,5 +40,3 @@ const ProfileNavigation = () => {
     </nav>
   );
 };
-
-export default ProfileNavigation;

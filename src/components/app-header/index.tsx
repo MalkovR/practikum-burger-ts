@@ -1,9 +1,9 @@
 import style from "./app-header.module.css";
 import {BurgerIcon, ListIcon, Logo, ProfileIcon,} from "@ya.praktikum/react-developer-burger-ui-components";
-import NavMenuItem from "../nav-menu-item";
+import {NavMenuItem} from "../nav-menu-item";
 import {NavLink} from "react-router-dom";
 
-const AppHeader = () => {
+export const AppHeader = () => {
   return (
     <header className={style.app_header}>
       <nav className={style.navbar}>
@@ -13,7 +13,9 @@ const AppHeader = () => {
               {({ isActive }) => (
                 <li className={style.li_item}>
                   <NavMenuItem
-                    icon={BurgerIcon}
+                    icon={
+                      <BurgerIcon type={isActive ? "primary" : "secondary"} />
+                    }
                     name="Конструктор"
                     isActive={isActive}
                   />
@@ -24,10 +26,11 @@ const AppHeader = () => {
               {({ isActive }) => (
                 <li className={style.li_item}>
                   <NavMenuItem
-                    icon={ListIcon}
+                    icon={
+                      <ListIcon type={isActive ? "primary" : "secondary"} />
+                    }
                     name="Лента заказов"
-                    // temporary
-                    isActive={false}
+                    isActive={isActive}
                   />
                 </li>
               )}
@@ -42,7 +45,9 @@ const AppHeader = () => {
             <NavLink to="/profile">
               {({ isActive }) => (
                 <NavMenuItem
-                  icon={ProfileIcon}
+                  icon={
+                    <ProfileIcon type={isActive ? "primary" : "secondary"} />
+                  }
                   name="Личный кабинет"
                   isActive={isActive}
                 />
@@ -54,5 +59,3 @@ const AppHeader = () => {
     </header>
   );
 };
-
-export default AppHeader;

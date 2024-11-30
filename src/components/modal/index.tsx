@@ -2,15 +2,15 @@ import React, {useEffect} from "react";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {createPortal} from "react-dom";
 import style from "./modal.module.css";
-import ModalOverlay from "../modal-overlay";
+import {ModalOverlay} from "../modal-overlay";
 
-export interface IModal {
+type TModalProps = {
   title?: string;
   onClose: () => void;
   children: React.ReactNode;
-}
+};
 
-const Modal: React.FC<IModal> = ({ title, onClose, children }) => {
+export const Modal = ({ title, onClose, children }: TModalProps) => {
   useEffect(() => {
     const close = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -37,5 +37,3 @@ const Modal: React.FC<IModal> = ({ title, onClose, children }) => {
     document.getElementById("react-modals") as HTMLDivElement,
   );
 };
-
-export default Modal;

@@ -1,25 +1,28 @@
 import style from "./nav-menu-item.module.css";
+import React from "react";
 
-const NavMenuItem = (props: any) => {
+type TNavMenuItemProps = {
+  icon: React.ReactElement;
+  name: string;
+  isActive: boolean;
+};
+
+export const NavMenuItem = ({ icon, name, isActive }: TNavMenuItemProps) => {
   return (
     <>
       <div className={style.menu_item}>
-        <div className="mr-1">
-          <props.icon type={props.isActive ? "primary" : "secondary"} />
-        </div>
+        <div className="mr-1">{icon}</div>
         <div className="ml-1">
           <p
             className={
               "text text_type_main-small" +
-              (props.isActive ? "" : " text_color_inactive")
+              (isActive ? "" : " text_color_inactive")
             }
           >
-            {props.name}
+            {name}
           </p>
         </div>
       </div>
     </>
   );
 };
-
-export default NavMenuItem;

@@ -1,16 +1,14 @@
-import React, {useState} from "react";
+import {FormEvent, useState} from "react";
 import style from "./forgot-password.module.css";
 import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
 import {forgotPasswordRequest} from "../../utils/burger-api";
 
-const ForgotPassword = () => {
-  const dispatch = useDispatch();
+export const ForgotPassword = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     forgotPasswordRequest(email);
     navigate("/reset-password", { state: { resetPassword: true } });
@@ -52,5 +50,3 @@ const ForgotPassword = () => {
     </div>
   );
 };
-
-export default ForgotPassword;

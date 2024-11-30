@@ -1,18 +1,24 @@
 import {
-    FORGOT_PASSWORD_URL,
-    INGREDIENTS_URL,
-    LOGIN_URL,
-    LOGOUT_URL,
-    ORDER_URL,
-    REGISTER_URL,
-    RENEW_TOKEN_URL,
-    RESET_PASSWORD_URL,
-    USER_URL,
+  FORGOT_PASSWORD_URL,
+  INGREDIENTS_URL,
+  LOGIN_URL,
+  LOGOUT_URL,
+  ORDER_URL,
+  REGISTER_URL,
+  RENEW_TOKEN_URL,
+  RESET_PASSWORD_URL,
+  USER_URL,
 } from "../const";
+
+type TUser = {
+  email: string;
+  name: string;
+  password: string;
+};
 
 // общие проверки
 
-const checkFetchResponse = (res) => {
+const checkFetchResponse = (res: Response) => {
   return res.ok
     ? res.json()
     : res.json().then((err) => {
@@ -24,7 +30,7 @@ const checkFetchResponse = (res) => {
       });
 };
 
-const checkJsonSuccess = (data) => {
+const checkJsonSuccess = (data: any) => {
   return data && data.success
     ? data
     : data && data.message
@@ -40,7 +46,7 @@ export const getIngredientData = () => {
 
 // разместить заказ
 
-const orderPostOptions = (ids) => {
+const orderPostOptions = (ids: Array<string>) => {
   return {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -48,7 +54,7 @@ const orderPostOptions = (ids) => {
   };
 };
 
-export const getOrderData = (ingredient_ids) => {
+export const getOrderData = (ingredient_ids: Array<string>) => {
   return fetch(ORDER_URL, orderPostOptions(ingredient_ids))
     .then(checkFetchResponse)
     .then(checkJsonSuccess);
@@ -56,7 +62,7 @@ export const getOrderData = (ingredient_ids) => {
 
 // авторизация
 
-const loginPostOptions = (email, password) => {
+const loginPostOptions = ({ email, password }: Omit<TUser, "name">) => {
   return {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -64,15 +70,15 @@ const loginPostOptions = (email, password) => {
   };
 };
 
-export const loginRequest = (email, password) => {
-  return fetch(LOGIN_URL, loginPostOptions(email, password))
+export const loginRequest = ({ email, password }: Omit<TUser, "name">) => {
+  return fetch(LOGIN_URL, loginPostOptions({ email, password }))
     .then(checkFetchResponse)
     .then(checkJsonSuccess);
 };
 
 // регистрация
 
-const registerPostOptions = (email, password, name) => {
+const registerPostOptions = ({ email, password, name }: TUser) => {
   return {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -80,15 +86,15 @@ const registerPostOptions = (email, password, name) => {
   };
 };
 
-export const registerRequest = (email, password, name) => {
-  return fetch(REGISTER_URL, registerPostOptions(email, password, name))
+export const registerRequest = ({ email, password, name }: TUser) => {
+  return fetch(REGISTER_URL, registerPostOptions({ email, password, name }))
     .then(checkFetchResponse)
     .then(checkJsonSuccess);
 };
 
 // выход
 
-const logoutPostOptions = (refreshToken) => {
+const logoutPostOptions = (refreshToken: string) => {
   return {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -96,7 +102,7 @@ const logoutPostOptions = (refreshToken) => {
   };
 };
 
-export const logoutRequest = (refreshToken) => {
+export const logoutRequest = (refreshToken: string) => {
   return fetch(LOGOUT_URL, logoutPostOptions(refreshToken))
     .then(checkFetchResponse)
     .then(checkJsonSuccess);
@@ -104,7 +110,7 @@ export const logoutRequest = (refreshToken) => {
 
 // обновление токена
 
-const renewTokenPostOptions = (refreshToken) => {
+const renewTokenPostOptions = (refreshToken: string) => {
   return {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -112,7 +118,7 @@ const renewTokenPostOptions = (refreshToken) => {
   };
 };
 
-export const renewTokenRequest = (refreshToken) => {
+export const renewTokenRequest = (refreshToken: string) => {
   return fetch(RENEW_TOKEN_URL, renewTokenPostOptions(refreshToken))
     .then(checkFetchResponse)
     .then(checkJsonSuccess);
@@ -120,14 +126,14 @@ export const renewTokenRequest = (refreshToken) => {
 
 // информация о пользователе
 
-const getUserOptions = (accessToken) => {
+const getUserOptions = (accessToken: string) => {
   return {
     method: "GET",
     headers: { "Content-Type": "application/json", Authorization: accessToken },
   };
 };
 
-export const getUserRequest = (accessToken) => {
+export const getUserRequest = (accessToken: string) => {
   return fetch(USER_URL, getUserOptions(accessToken))
     .then(checkFetchResponse)
     .then(checkJsonSuccess);
@@ -135,7 +141,12 @@ export const getUserRequest = (accessToken) => {
 
 // редактировать пользователя
 
-const patchUserEditOptions = (accessToken, email, password, name) => {
+const patchUserEditOptions = ({
+  accessToken,
+  email,
+  password,
+  name,
+}: TUser & { accessToken: string }) => {
   return {
     method: "PATCH",
     headers: { "Content-Type": "application/json", Authorization: accessToken },
@@ -147,10 +158,15 @@ const patchUserEditOptions = (accessToken, email, password, name) => {
   };
 };
 
-export const editUserRequest = (accessToken, email, password, name) => {
+export const editUserRequest = ({
+  accessToken,
+  email,
+  password,
+  name,
+}: TUser & { accessToken: string }) => {
   return fetch(
     USER_URL,
-    patchUserEditOptions(accessToken, email, password, name),
+    patchUserEditOptions({ accessToken, email, password, name }),
   )
     .then(checkFetchResponse)
     .then(checkJsonSuccess);
@@ -158,7 +174,7 @@ export const editUserRequest = (accessToken, email, password, name) => {
 
 // Восстановить пароль
 
-const forgotPasswordPostOptions = (email) => {
+const forgotPasswordPostOptions = (email: string) => {
   return {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -166,7 +182,7 @@ const forgotPasswordPostOptions = (email) => {
   };
 };
 
-export const forgotPasswordRequest = (email) => {
+export const forgotPasswordRequest = (email: string) => {
   return fetch(FORGOT_PASSWORD_URL, forgotPasswordPostOptions(email))
     .then(checkFetchResponse)
     .then(checkJsonSuccess);
@@ -174,7 +190,10 @@ export const forgotPasswordRequest = (email) => {
 
 // Сбросить пароль
 
-const resetPasswordPostOptions = (password, token) => {
+const resetPasswordPostOptions = (
+  password: string,
+  token: string,
+) => {
   return {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -182,7 +201,10 @@ const resetPasswordPostOptions = (password, token) => {
   };
 };
 
-export const resetPasswordRequest = (password, token) => {
+export const resetPasswordRequest = (
+  password: string,
+  token: string,
+) => {
   return fetch(RESET_PASSWORD_URL, resetPasswordPostOptions(password, token))
     .then(checkFetchResponse)
     .then(checkJsonSuccess);

@@ -1,9 +1,8 @@
-import React from "react";
 import style from "./profile.module.css";
-import ProfileNavigation from "./profile-navigation";
-import ProfileForm from "./profile-form";
+import {ProfileNavigation} from "./profile-navigation";
+import {ProfileForm} from "./profile-form";
 
-const Profile = () => {
+export const Profile = () => {
   return (
     <div className={`${style.profile}`}>
       <div className={style.block_width}>
@@ -16,5 +15,3 @@ const Profile = () => {
     </div>
   );
 };
-
-export default Profile;
