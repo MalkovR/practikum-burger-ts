@@ -1,7 +1,7 @@
 import {MouseEvent} from "react";
 import style from "./profile-navigation.module.css";
 import {NavLink} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch} from "../../../services/store";
 import {logout} from "../../../services/auth/actions";
 
 export const ProfileNavigation = () => {

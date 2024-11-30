@@ -1,5 +1,5 @@
 import {IngredientItem} from "../ingredient-item";
-import {useDispatch} from "react-redux";
+import {useDispatch} from "../../services/store";
 import {getIngredientsDetails} from "../../services/selected-ingredient/actions";
 import style from "./burger-ingredients-list.module.css";
 import {TBurgerIngredient} from "../../types/common.ts";

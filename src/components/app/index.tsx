@@ -10,7 +10,7 @@ import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {OnlyAuth, OnlyUnAuth,} from "../protected-route-element/protected-route-element.tsx";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/store";
 import {useEffect} from "react";
 import {checkUserAuth} from "../../services/auth/actions";
 import {IngredientDetails} from "../ingredient-details";

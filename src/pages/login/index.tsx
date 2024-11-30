@@ -3,7 +3,7 @@ import style from "./login.module.css";
 import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link} from "react-router-dom";
 import {login} from "../../services/auth/actions";
-import {useDispatch} from "react-redux";
+import {useDispatch} from "../../services/store";
 
 export const Login = () => {
   const dispatch = useDispatch();

@@ -1,26 +1,28 @@
-import {applyMiddleware, compose, createStore} from "redux";
+import {ActionCreator, Action} from "redux";
 import {rootReducer} from "./root-reducer";
-import {thunk} from "redux-thunk";
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
   useSelector as selectorHook
 } from 'react-redux';
+import {thunk} from "redux-thunk";
+import {ThunkAction} from "redux-thunk";
+import {TSelectedIngredientActions} from "./selected-ingredient/actions";
+import {TOrderActions} from "./order/actions";
+import {TIngredientsActions} from "./burger-ingredients/actions";
+import {TBurgerConstructorActions} from "./burger-constructor/actions";
+import {TAuthActions} from "./auth/actions";
+import {configureStore} from "@reduxjs/toolkit";
 
-const composeEnhancers =
-  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose;
 
-const enhancer = composeEnhancers(applyMiddleware(thunk));
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware)  => getDefaultMiddleware().concat(thunk),
+})
 
-export const configureStore = () => {
-  const store = createStore(rootReducer, enhancer);
-  return store;
-};
-
+type TAppActions = TSelectedIngredientActions | TOrderActions | TIngredientsActions | TBurgerConstructorActions | TAuthActions;
+export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, RootState, TAppActions>>;
 export type RootState = ReturnType<typeof rootReducer>;
-
 export type AppDispatch = typeof store.dispatch;
 
 export const useDispatch: () => AppDispatch = () => dispatchHook();

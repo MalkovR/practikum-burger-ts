@@ -3,7 +3,7 @@ import {Button, ConstructorElement, CurrencyIcon,} from "@ya.praktikum/react-dev
 import style from "./burger-constructor.module.css";
 import {Modal} from "../modal";
 import {OrderDetails} from "../order-details";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/store";
 import {getConstructorIngredients} from "../../services/burger-constructor/selectors";
 import {addBun, addIngredient, resetConstructor,} from "../../services/burger-constructor/actions";
 import {getOrderDetails, resetOrder} from "../../services/order/actions";

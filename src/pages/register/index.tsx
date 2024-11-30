@@ -2,7 +2,7 @@ import {FormEvent, useRef, useState} from "react";
 import style from "./register.module.css";
 import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch} from "../../services/store";
 import {register} from "../../services/auth/actions";
 
 export const Register = () => {
