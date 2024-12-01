@@ -31,7 +31,6 @@ export const IngredientDetails = () => {
 
   useEffect(() => {
     if (currentIngredient) {
-      // @ts-ignore
       dispatch(getIngredientsDetails(currentIngredient));
     }
   }, [dispatch, currentIngredient]);

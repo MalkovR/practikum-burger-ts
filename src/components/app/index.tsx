@@ -25,9 +25,7 @@ function App() {
   const { loading, error, ingredients } = useSelector(getBurgerIngredientsAll);
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(getIngredients());
-    // @ts-ignore
     dispatch(checkUserAuth());
   }, [dispatch]);
 

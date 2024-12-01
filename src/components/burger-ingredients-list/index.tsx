@@ -18,7 +18,6 @@ export const BurgerIngredientsList = ({
       {items.map((item) => (
         <div
           key={item._id}
-          // @ts-ignore
           onClick={() => dispatch(getIngredientsDetails(item))}
         >
           <IngredientItem burgerIngredient={item} />

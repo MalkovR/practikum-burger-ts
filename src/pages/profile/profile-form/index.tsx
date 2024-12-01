@@ -37,7 +37,6 @@ export const ProfileForm = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(editUser(data));
     setButtonActive(false);
   };

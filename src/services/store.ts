@@ -25,5 +25,5 @@ export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
 
-export const useDispatch: () => AppDispatch = () => dispatchHook();
+export const useDispatch: () => AppDispatch | AppThunk = () => dispatchHook();
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;

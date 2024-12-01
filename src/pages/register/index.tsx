@@ -26,7 +26,6 @@ export const Register = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(register({ email: email, password: password, name: username }));
   };
 

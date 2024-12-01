@@ -25,7 +25,6 @@ export const Login = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(login({ email: email, password: password }));
   };
 

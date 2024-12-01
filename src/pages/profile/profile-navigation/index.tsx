@@ -9,7 +9,6 @@ export const ProfileNavigation = () => {
 
   const handleLogout = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(logout());
   };
 

@@ -86,7 +86,6 @@ export const BurgerConstructorItem = ({
         text={item.name}
         price={item.price}
         thumbnail={item.image_mobile}
-        // @ts-ignore
         handleClose={() => dispatch(removeIngredient(item))}
       />
     </div>
