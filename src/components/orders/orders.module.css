@@ -1,11 +1,11 @@
 .scroll {
-    height: 650px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
 }
 
 .link {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }

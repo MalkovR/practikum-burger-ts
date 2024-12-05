@@ -1,13 +1,17 @@
-import {INGREDIENTS_LOAD_ERROR, INGREDIENTS_LOAD_SUCCESS, INGREDIENTS_LOADING, TIngredientsActions} from "./actions.js";
-import {TBurgerIngredient} from "../../types/common.ts";
-
+import {
+  INGREDIENTS_LOAD_ERROR,
+  INGREDIENTS_LOAD_SUCCESS,
+  INGREDIENTS_LOADING,
+  TIngredientsActions,
+} from "./actions.js";
+import { TBurgerIngredient } from "../../types/common.ts";
 
 export type TIngredientsState = {
-  success: boolean,
-  ingredients: Array<TBurgerIngredient>,
-  loading: boolean,
-  error: null | string,
-}
+  success: boolean;
+  ingredients: Array<TBurgerIngredient>;
+  loading: boolean;
+  error: null | string;
+};
 
 const initialState: TIngredientsState = {
   success: false,
@@ -24,7 +28,7 @@ export const reducer = (state = initialState, action: TIngredientsActions) => {
         loading: true,
       };
     case INGREDIENTS_LOAD_SUCCESS: {
-      const {success, ingredients} = action.payload
+      const { success, ingredients } = action.payload;
       return {
         ...state,
         loading: false,

@@ -10,7 +10,7 @@ import {
   USER_URL,
   HTTPS_URL_BASE,
 } from "../const";
-import {TUser} from "../types/common.ts";
+import { TUser } from "../types/common.ts";
 
 // общие проверки
 
@@ -50,10 +50,13 @@ const orderPostOptions = (ids: Array<string>, accessToken: string) => {
   };
 };
 
-export const getOrderData = (ingredient_ids: Array<string>, accessToken: string) => {
-    return fetch(ORDER_URL, orderPostOptions(ingredient_ids, accessToken))
-      .then(checkFetchResponse)
-      .then(checkJsonSuccess);
+export const getOrderData = (
+  ingredient_ids: Array<string>,
+  accessToken: string,
+) => {
+  return fetch(ORDER_URL, orderPostOptions(ingredient_ids, accessToken))
+    .then(checkFetchResponse)
+    .then(checkJsonSuccess);
 };
 
 // авторизация
@@ -186,10 +189,7 @@ export const forgotPasswordRequest = (email: string) => {
 
 // Сбросить пароль
 
-const resetPasswordPostOptions = (
-  password: string,
-  token: string,
-) => {
+const resetPasswordPostOptions = (password: string, token: string) => {
   return {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -197,10 +197,7 @@ const resetPasswordPostOptions = (
   };
 };
 
-export const resetPasswordRequest = (
-  password: string,
-  token: string,
-) => {
+export const resetPasswordRequest = (password: string, token: string) => {
   return fetch(RESET_PASSWORD_URL, resetPasswordPostOptions(password, token))
     .then(checkFetchResponse)
     .then(checkJsonSuccess);
@@ -208,6 +205,6 @@ export const resetPasswordRequest = (
 
 export const getFeedOrder = (orderNumber: string) => {
   return fetch(HTTPS_URL_BASE + `/${orderNumber}`)
-      .then(checkFetchResponse)
-      .then(checkJsonSuccess);
-}
+    .then(checkFetchResponse)
+    .then(checkJsonSuccess);
+};

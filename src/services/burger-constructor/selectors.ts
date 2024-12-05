@@ -1,3 +1,4 @@
-import {RootState} from "../store.ts";
+import { RootState } from "../store.ts";
 
-export const getConstructorIngredients = (state: RootState) => state.burgerConstructor;
+export const getConstructorIngredients = (state: RootState) =>
+  state.burgerConstructor;

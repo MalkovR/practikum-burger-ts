@@ -1,18 +1,30 @@
-import {ADD_BUN, ADD_INGREDIENT, MOVE_INGREDIENT, REMOVE_INGREDIENT, RESET_CONSTRUCTOR, TBurgerConstructorActions} from "./actions.js";
-import {TBurgerIngredient, TBurgerIngredientWithUuid} from "../../types/common.ts";
-
+import {
+  ADD_BUN,
+  ADD_INGREDIENT,
+  MOVE_INGREDIENT,
+  REMOVE_INGREDIENT,
+  RESET_CONSTRUCTOR,
+  TBurgerConstructorActions,
+} from "./actions.js";
+import {
+  TBurgerIngredient,
+  TBurgerIngredientWithUuid,
+} from "../../types/common.ts";
 
 export type TBurgerConstructorState = {
-  bun: null | TBurgerIngredient,
-  ingredients: Array<TBurgerIngredientWithUuid>,
-}
+  bun: null | TBurgerIngredient;
+  ingredients: Array<TBurgerIngredientWithUuid>;
+};
 
 const initialState: TBurgerConstructorState = {
   bun: null,
   ingredients: [],
 };
 
-export const reducer = (state = initialState, action: TBurgerConstructorActions) => {
+export const reducer = (
+  state = initialState,
+  action: TBurgerConstructorActions,
+) => {
   switch (action.type) {
     case ADD_INGREDIENT:
       return {

@@ -1,6 +1,6 @@
 import style from "./burgers.module.css";
-import {BurgerIngredients} from "../burger-ingredients";
-import {BurgerConstructor} from "../burger-constructor";
+import { BurgerIngredients } from "../burger-ingredients";
+import { BurgerConstructor } from "../burger-constructor";
 
 export const Burgers = () => {
   return (

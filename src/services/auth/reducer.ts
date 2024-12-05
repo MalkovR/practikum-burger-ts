@@ -1,37 +1,36 @@
 import {
-    SET_AUTH_CHECKED,
-    USER_LOGIN_ERROR,
-    USER_LOGIN_REQUEST,
-    USER_LOGIN_SUCCESS,
-    USER_LOGOUT_ERROR,
-    USER_LOGOUT_REQUEST,
-    USER_LOGOUT_SUCCESS,
-    USER_PROFILE_ERROR,
-    USER_PROFILE_REQUEST,
-    USER_PROFILE_SUCCESS,
-    USER_REGISTER_ERROR,
-    USER_REGISTER_REQUEST,
-    USER_REGISTER_SUCCESS,
-    USER_RENEW_TOKEN_ERROR,
-    USER_RENEW_TOKEN_REQUEST,
-    USER_RENEW_TOKEN_SUCCESS,
-    USER_UPDATE_PROFILE_ERROR,
-    USER_UPDATE_PROFILE_REQUEST,
-    USER_UPDATE_PROFILE_SUCCESS,
-    TAuthActions
+  SET_AUTH_CHECKED,
+  USER_LOGIN_ERROR,
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+  USER_LOGOUT_ERROR,
+  USER_LOGOUT_REQUEST,
+  USER_LOGOUT_SUCCESS,
+  USER_PROFILE_ERROR,
+  USER_PROFILE_REQUEST,
+  USER_PROFILE_SUCCESS,
+  USER_REGISTER_ERROR,
+  USER_REGISTER_REQUEST,
+  USER_REGISTER_SUCCESS,
+  USER_RENEW_TOKEN_ERROR,
+  USER_RENEW_TOKEN_REQUEST,
+  USER_RENEW_TOKEN_SUCCESS,
+  USER_UPDATE_PROFILE_ERROR,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_SUCCESS,
+  TAuthActions,
 } from "./actions.js";
-
 
 export type TAuthState = {
   user: {
-    email: string,
-    name: string,
-  },
-  isUserLoaded: boolean,
-  isAuthChecked: boolean,
-  loading: boolean,
-  error: null | string,
-}
+    email: string;
+    name: string;
+  };
+  isUserLoaded: boolean;
+  isAuthChecked: boolean;
+  loading: boolean;
+  error: null | string;
+};
 
 const initialState: TAuthState = {
   user: {

@@ -1,12 +1,12 @@
 .section {
-    width: 1240px;
-    margin: auto;
-    padding-top: 40px;
-    padding-bottom: 20px;
+  width: 1240px;
+  margin: auto;
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
 
 .table {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
 }

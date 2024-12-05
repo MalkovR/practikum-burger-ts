@@ -1,6 +1,6 @@
 import style from "./profile.module.css";
-import {ProfileNavigation} from "./profile-navigation";
-import {ProfileForm} from "./profile-form";
+import { ProfileNavigation } from "./profile-navigation";
+import { ProfileForm } from "./profile-form";
 
 export const Profile = () => {
   return (

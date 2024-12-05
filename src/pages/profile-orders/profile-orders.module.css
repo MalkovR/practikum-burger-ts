@@ -1,29 +1,28 @@
 .scroll {
-    width: auto;
-    height: 650px;
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-
+  width: auto;
+  height: 650px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile {
-    display: flex;
-    padding: 0 280px;
-    gap: 60px
+  display: flex;
+  padding: 0 280px;
+  gap: 60px;
 }
 
 .block_width_less {
-    width: 33%;
-    height: 400px;
+  width: 33%;
+  height: 400px;
 }
 
 .block_width_more {
-    width: 66%;
-    height: 400px;
+  width: 66%;
+  height: 400px;
 }
 
 .link {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }

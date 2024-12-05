@@ -1,11 +1,11 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 import style from "./ingredient-details.module.css";
-import {useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "../../services/store";
-import {getBurgerIngredients} from "../../services/burger-ingredients/selectors";
-import {getSelectedIngredient} from "../../services/selected-ingredient/selectors";
-import {getIngredientsDetails} from "../../services/selected-ingredient/actions";
-import {TBurgerIngredient} from "../../types/common.ts";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "../../services/store";
+import { getBurgerIngredients } from "../../services/burger-ingredients/selectors";
+import { getSelectedIngredient } from "../../services/selected-ingredient/selectors";
+import { getIngredientsDetails } from "../../services/selected-ingredient/actions";
+import { TBurgerIngredient } from "../../types/common.ts";
 
 type TDescriptionProps = {
   title: string;
