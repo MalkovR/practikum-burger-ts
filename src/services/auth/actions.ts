@@ -7,7 +7,6 @@ import {
     renewTokenRequest,
 } from "../../utils/burger-api";
 import {AppThunk} from "../store.ts";
-import {deleteCookie, getCookie, setCookie} from "../../utils/cookie.ts";
 import {TUser} from "../../types/common.ts";
 
 export const SET_AUTH_CHECKED: "SET_AUTH_CHECKED" = "SET_AUTH_CHECKED";
@@ -51,7 +50,7 @@ export const setAuthChecked: AppThunk = (value: boolean) => (dispatch) => {
 export const checkUserAuth: AppThunk = () => {
   return (dispatch) => {
     dispatch(userProfileRequest());
-    let accessToken = getCookie("accessToken");
+    let accessToken = localStorage.getItem("accessToken")
 
     if (accessToken) {
       accessToken = "Bearer " + accessToken;
@@ -59,12 +58,13 @@ export const checkUserAuth: AppThunk = () => {
         .then((res) => dispatch(userProfileSuccessRequest(res.user)))
         .catch((error) => {
           if (error.message === "jwt expired") {
-              renewTokens();
-              dispatch(checkUserAuth());
+              renewTokens().then(() => {
+                  dispatch(checkUserAuth());
+              });
           } else {
             localStorage.removeItem("refreshToken");
-            deleteCookie("accessToken");
-            dispatch(userProfileErrorRequest());
+            localStorage.removeItem("accessToken");
+            dispatch(userProfileErrorRequest(error.message));
           }
         });
     } else {
@@ -113,7 +113,7 @@ export const register: AppThunk = ({ email, password, name }) => {
       .then((res) => {
         const accessToken = res.accessToken.split("Bearer ")[1];
         const refreshToken = res.refreshToken;
-        setCookie("accessToken", accessToken, {});
+        localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         dispatch(userRegisterSuccessRequest(res.user));
       })
@@ -158,12 +158,12 @@ export const renewToken: AppThunk = () => {
   return (dispatch) => {
     dispatch(userRenewTokenRequest());
 
-    const refreshToken = localStorage.getItem("refreshToken");
-      refreshToken && renewTokenRequest(refreshToken)
+    const refreshToken = localStorage.getItem("refreshToken") || '';
+    renewTokenRequest(refreshToken)
       .then((res) => {
         const accessToken = res.accessToken.split("Bearer ")[1];
         const refreshToken = res.refreshToken;
-        setCookie("accessToken", accessToken, {});
+        localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         dispatch(userRenewTokenSuccessRequest());
       })
@@ -174,19 +174,19 @@ export const renewToken: AppThunk = () => {
 };
 
 export const renewTokens = () => {
-  const refreshToken = localStorage.getItem("refreshToken");
+  const refreshToken = localStorage.getItem("refreshToken") || '';
 
-  return refreshToken && renewTokenRequest(refreshToken)
+  return renewTokenRequest(refreshToken)
     .then((res) => {
       const accessToken = res.accessToken.split("Bearer ")[1];
       const refreshToken = res.refreshToken;
 
-      setCookie("accessToken", accessToken, {});
+      localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
     })
     .catch((error) => {
         console.log(error)
-        deleteCookie("accessToken");
+        localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
     });
 };
@@ -231,7 +231,7 @@ export const login: AppThunk = ({ email, password }) => {
       .then((res) => {
         const accessToken = res.accessToken.split("Bearer ")[1];
         const refreshToken = res.refreshToken;
-        setCookie("accessToken", accessToken, {});
+        localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         dispatch(userLoginSuccessRequest(res.user));
       })
@@ -276,11 +276,11 @@ export const logout: AppThunk = () => {
   return (dispatch) => {
     dispatch(userLogoutRequest());
 
-    const refreshToken = localStorage.getItem("refreshToken");
-      refreshToken && logoutRequest(refreshToken)
+    const refreshToken = localStorage.getItem("refreshToken") || '';
+    logoutRequest(refreshToken)
       .then(() => {
         localStorage.removeItem("refreshToken");
-        deleteCookie("accessToken");
+        localStorage.removeItem("accessToken");
         dispatch(userLogoutSuccessRequest());
       })
       .catch((error) => {
@@ -326,17 +326,19 @@ export const profile: AppThunk = () => {
   return (dispatch) => {
     dispatch(userProfileRequest());
 
-    const accessToken = "Bearer " + getCookie("accessToken");
+    const accessToken = "Bearer " + localStorage.getItem("accessToken");
     getUserRequest(accessToken)
       .then((res) => {
         dispatch(userProfileSuccessRequest(res.user));
       })
       .catch((error) => {
         if (error.message === "jwt expired") {
-          dispatch(renewToken());
-          dispatch(profile());
+          renewTokens()
+              .then(() => {
+                  dispatch(profile());
+              });
         } else {
-          dispatch(userProfileErrorRequest(error));
+          dispatch(userProfileErrorRequest(error.message));
         }
       });
   };
@@ -379,18 +381,19 @@ export const editUser: AppThunk = ({ email, password, name }) => {
   return (dispatch) => {
     dispatch(userUpdateProfileRequest());
 
-    const accessToken = "Bearer " + getCookie("accessToken");
+    const accessToken = "Bearer " + localStorage.getItem("accessToken");
     editUserRequest({accessToken, email, password, name})
       .then((res) => {
         dispatch(userUpdateProfileSuccessRequest(res.user));
       })
       .catch((error) => {
         if (error.message === "jwt expired") {
-            renewTokens();
-            dispatch(editUser({ email, password, name }));
+            renewTokens().then(() => {
+                dispatch(editUser({ email, password, name }));
+            });
         } else {
           console.log(error);
-          dispatch(userUpdateProfileErrorRequest());
+          dispatch(userUpdateProfileErrorRequest(error.message));
         }
       });
   };

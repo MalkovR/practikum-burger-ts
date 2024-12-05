@@ -32,8 +32,10 @@ export type TOrderActions = TGetOrderDetails | TResetOrder | TPostOrder | TError
 
 export const getOrderDetails: AppThunk = (ingredient_ids: Array<string>) => (dispatch) => {
   dispatch({ type: POST_ORDER });
-
-  return getOrderData(ingredient_ids)
+  let accessToken = localStorage.getItem("accessToken")
+  if (accessToken) {
+    accessToken = "Bearer " + accessToken;
+    return getOrderData(ingredient_ids, accessToken)
     .then((res) => {
       const {success, name, order} = res
       dispatch({
@@ -51,10 +53,10 @@ export const getOrderDetails: AppThunk = (ingredient_ids: Array<string>) => (dis
         payload: error.message,
       });
     });
-};
+}}
 
-export const resetOrder = () => {
-  return {
+export const resetOrder: AppThunk = () => (dispatch) => {
+  return dispatch({
     type: RESET_ORDER,
-  };
+  });
 };

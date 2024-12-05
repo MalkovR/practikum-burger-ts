@@ -1,0 +1,32 @@
+.orders_info_container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.info_table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+}
+
+.table_section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.table_content{
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 10px;
+    grid-template-rows: repeat(10, 1fr);
+}
+
+.orders_done {
+    color: #00cccc;
+}
+
+.total {
+    display: grid;
+}

@@ -8,6 +8,7 @@ import {
   RENEW_TOKEN_URL,
   RESET_PASSWORD_URL,
   USER_URL,
+  HTTPS_URL_BASE,
 } from "../const";
 import {TUser} from "../types/common.ts";
 
@@ -41,18 +42,18 @@ export const getIngredientData = () => {
 
 // разместить заказ
 
-const orderPostOptions = (ids: Array<string>) => {
+const orderPostOptions = (ids: Array<string>, accessToken: string) => {
   return {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Authorization: accessToken },
     body: JSON.stringify({ ingredients: ids }),
   };
 };
 
-export const getOrderData = (ingredient_ids: Array<string>) => {
-  return fetch(ORDER_URL, orderPostOptions(ingredient_ids))
-    .then(checkFetchResponse)
-    .then(checkJsonSuccess);
+export const getOrderData = (ingredient_ids: Array<string>, accessToken: string) => {
+    return fetch(ORDER_URL, orderPostOptions(ingredient_ids, accessToken))
+      .then(checkFetchResponse)
+      .then(checkJsonSuccess);
 };
 
 // авторизация
@@ -204,3 +205,9 @@ export const resetPasswordRequest = (
     .then(checkFetchResponse)
     .then(checkJsonSuccess);
 };
+
+export const getFeedOrder = (orderNumber: string) => {
+  return fetch(HTTPS_URL_BASE + `/${orderNumber}`)
+      .then(checkFetchResponse)
+      .then(checkJsonSuccess);
+}

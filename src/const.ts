@@ -14,3 +14,5 @@ export const FORGOT_PASSWORD_URL =
   "https://norma.nomoreparties.space/api/password-reset";
 export const RESET_PASSWORD_URL =
   "https://norma.nomoreparties.space/api/password-reset/reset";
+export const WS_URL_BASE = 'wss://norma.nomoreparties.space/orders';
+export const HTTPS_URL_BASE = 'https://norma.nomoreparties.space/api/orders';

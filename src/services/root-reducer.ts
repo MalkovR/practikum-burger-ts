@@ -4,6 +4,7 @@ import {reducer as burgerConstructorReducer} from "./burger-constructor/reducer"
 import {reducer as selectedIngredientReducer} from "./selected-ingredient/reducer";
 import {reducer as orderReducer} from "./order/reducer";
 import {reducer as authReducer} from "./auth/reducer";
+import {reducer as wsReducer} from "./feed-ws/reducer.ts";
 
 export const rootReducer = combineReducers({
   burgerIngredients: burgerIngredientsReducer,
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
   selectedIngredient: selectedIngredientReducer,
   order: orderReducer,
   auth: authReducer,
+  feed: wsReducer,
 });

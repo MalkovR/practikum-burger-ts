@@ -22,7 +22,7 @@ export const AppHeader = () => {
                 </li>
               )}
             </NavLink>
-            <NavLink to="/lenta">
+            <NavLink to="/feed">
               {({ isActive }) => (
                 <li className={style.li_item}>
                   <NavMenuItem
