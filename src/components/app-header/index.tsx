@@ -43,7 +43,9 @@ export const AppHeader = () => {
           </ul>
         </div>
         <div className={style.block_width}>
-          <Logo />
+          <NavLink to="/">
+            <Logo />
+          </NavLink>
         </div>
         <div className={style.block_width}>
           <span className={style.personal}>
