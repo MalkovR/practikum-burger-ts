@@ -5,6 +5,7 @@ import {
   TBurgerIngredientWithUuid,
   TBurgerIngredient,
 } from "../../types/common.ts";
+import { TBurgerConstructorActions } from "./actions.ts";
 
 const testNotBunIngredientsWithUuid: TBurgerIngredientWithUuid = {
   _id: "643d69a5c3f7b9001cfa0943",
@@ -38,7 +39,7 @@ const testNotBunIngredientsWithUuidOther: TBurgerIngredientWithUuid = {
   uuid: "3574252a-20e2-4157-949d-1fae311b65f9",
 };
 
-const testNotBunIngredient: TBurgerIngredient = {
+const testBunIngredient: TBurgerIngredient = {
   _id: "643d69a5c3f7b9001cfa093d",
   name: "Флюоресцентная булка R2-D3",
   type: "bun",
@@ -54,9 +55,14 @@ const testNotBunIngredient: TBurgerIngredient = {
 };
 
 describe("Burger Constructor Reducer", () => {
-  // it('should return initial state', () => {
-  //     expect(reducer(undefined, {type: ""})).toEqual(initialState)
-  // });
+  it("should return initial state", () => {
+    expect(
+      reducer(undefined, {
+        type: "XXX",
+      } as unknown as TBurgerConstructorActions),
+    ).toEqual(initialState);
+  });
+
   it("should add ingredient", () => {
     expect(
       reducer(initialState, {
@@ -73,9 +79,9 @@ describe("Burger Constructor Reducer", () => {
     expect(
       reducer(initialState, {
         type: types.ADD_BUN,
-        payload: testNotBunIngredient,
+        payload: testBunIngredient,
       }),
-    ).toEqual({ ...initialState, bun: testNotBunIngredient });
+    ).toEqual({ ...initialState, bun: testBunIngredient });
   });
 
   it("should remove ingredient", () => {
@@ -91,10 +97,37 @@ describe("Burger Constructor Reducer", () => {
     ).toEqual(initialState);
   });
 
+  it("should not remove bun", () => {
+    const initialStateWithIngredient = {
+      ...initialState,
+      ingredients: [...initialState.ingredients, testNotBunIngredientsWithUuid],
+      bun: testBunIngredient,
+    };
+    expect(
+      reducer(initialStateWithIngredient, {
+        type: types.REMOVE_INGREDIENT,
+        payload: testBunIngredient as unknown as TBurgerIngredientWithUuid,
+      }),
+    ).toEqual(initialStateWithIngredient);
+  });
+
   it("should reset constructor", () => {
+    const initialStateWithIngredient = {
+      ...initialState,
+      ingredients: [...initialState.ingredients, testNotBunIngredientsWithUuid],
+      bun: testBunIngredient,
+    };
+    expect(
+      reducer(initialStateWithIngredient, {
+        type: types.RESET_CONSTRUCTOR,
+      }),
+    ).toEqual(initialState);
+  });
+
+  it("should move ingredients", () => {
     const initialStateWithIngredients = {
       ...initialState,
-      bun: testNotBunIngredient,
+      bun: testBunIngredient,
       ingredients: [
         ...initialState.ingredients,
         testNotBunIngredientsWithUuid,
@@ -108,7 +141,7 @@ describe("Burger Constructor Reducer", () => {
       }),
     ).toEqual({
       ...initialState,
-      bun: testNotBunIngredient,
+      bun: testBunIngredient,
       ingredients: [
         ...initialState.ingredients,
         testNotBunIngredientsWithUuidOther,

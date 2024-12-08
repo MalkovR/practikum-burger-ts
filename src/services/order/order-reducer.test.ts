@@ -1,11 +1,14 @@
 import { describe, expect, it } from "@jest/globals";
 import { initialState, reducer } from "./reducer.ts";
 import * as types from "./actions.ts";
+import { TOrderActions } from "./actions.ts";
 
 describe("Order Reducer", () => {
-  // it('should return initial state', () => {
-  //     expect(reducer(undefined, {type: ""})).toEqual(initialState)
-  // });
+  it("should return initial state", () => {
+    expect(
+      reducer(undefined, { type: "XXX" } as unknown as TOrderActions),
+    ).toEqual(initialState);
+  });
 
   it("should set loading true", () => {
     expect(

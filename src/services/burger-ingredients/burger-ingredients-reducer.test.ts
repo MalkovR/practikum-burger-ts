@@ -2,6 +2,7 @@ import { describe, expect, it } from "@jest/globals";
 import { initialState, reducer } from "./reducer.ts";
 import * as types from "./actions.ts";
 import { TBurgerIngredient } from "../../types/common.ts";
+import { TIngredientsActions } from "./actions.ts";
 
 const testBurgetIngredients: Array<TBurgerIngredient> = [
   {
@@ -35,9 +36,12 @@ const testBurgetIngredients: Array<TBurgerIngredient> = [
 ];
 
 describe("Burger Ingredients Reducer", () => {
-  // it('should return initial state', () => {
-  //     expect(reducer(undefined, {type: ""})).toEqual(initialState)
-  // });
+  it("should return initial state", () => {
+    expect(
+      reducer(undefined, { type: "" } as unknown as TIngredientsActions),
+    ).toEqual(initialState);
+  });
+
   it("should move loading state to true", () => {
     expect(
       reducer(initialState, {

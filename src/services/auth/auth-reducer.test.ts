@@ -2,6 +2,7 @@ import { describe, expect, it } from "@jest/globals";
 import { initialState, reducer } from "./reducer.ts";
 import * as types from "./actions.ts";
 import { TUser } from "../../types/common.ts";
+import { TAuthActions } from "./actions.ts";
 
 const testUser: TUser = {
   email: "ttt@example.com",
@@ -9,9 +10,12 @@ const testUser: TUser = {
 };
 
 describe("Auth Reducer", () => {
-  // it('should return initial state', () => {
-  //     expect(reducer(undefined, {type: ""})).toEqual(initialState)
-  // });
+  it("should return initial state", () => {
+    expect(
+      reducer(undefined, { type: "XXX" } as unknown as TAuthActions),
+    ).toEqual(initialState);
+  });
+
   it("should move loading to true for user registration", () => {
     expect(
       reducer(initialState, {
