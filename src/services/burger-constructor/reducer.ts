@@ -1,11 +1,30 @@
-import {ADD_BUN, ADD_INGREDIENT, MOVE_INGREDIENT, REMOVE_INGREDIENT, RESET_CONSTRUCTOR,} from "./actions";
+import {
+  ADD_BUN,
+  ADD_INGREDIENT,
+  MOVE_INGREDIENT,
+  REMOVE_INGREDIENT,
+  RESET_CONSTRUCTOR,
+  TBurgerConstructorActions,
+} from "./actions.js";
+import {
+  TBurgerIngredient,
+  TBurgerIngredientWithUuid,
+} from "../../types/common.ts";
 
-const initialState = {
+export type TBurgerConstructorState = {
+  bun: null | TBurgerIngredient;
+  ingredients: Array<TBurgerIngredientWithUuid>;
+};
+
+const initialState: TBurgerConstructorState = {
   bun: null,
   ingredients: [],
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (
+  state = initialState,
+  action: TBurgerConstructorActions,
+) => {
   switch (action.type) {
     case ADD_INGREDIENT:
       return {
@@ -24,7 +43,7 @@ export const reducer = (state = initialState, action) => {
           action.payload.type === "bun"
             ? [...state.ingredients]
             : [...state.ingredients].filter(
-                (item) => item.uuid !== action.payload,
+                (item) => item.uuid !== action.payload.uuid,
               ),
       };
     }

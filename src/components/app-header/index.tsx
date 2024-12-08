@@ -1,7 +1,12 @@
 import style from "./app-header.module.css";
-import {BurgerIcon, ListIcon, Logo, ProfileIcon,} from "@ya.praktikum/react-developer-burger-ui-components";
-import {NavMenuItem} from "../nav-menu-item";
-import {NavLink} from "react-router-dom";
+import {
+  BurgerIcon,
+  ListIcon,
+  Logo,
+  ProfileIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import { NavMenuItem } from "../nav-menu-item";
+import { NavLink } from "react-router-dom";
 
 export const AppHeader = () => {
   return (
@@ -22,7 +27,7 @@ export const AppHeader = () => {
                 </li>
               )}
             </NavLink>
-            <NavLink to="/lenta">
+            <NavLink to="/feed">
               {({ isActive }) => (
                 <li className={style.li_item}>
                   <NavMenuItem
@@ -38,7 +43,9 @@ export const AppHeader = () => {
           </ul>
         </div>
         <div className={style.block_width}>
-          <Logo />
+          <NavLink to="/">
+            <Logo />
+          </NavLink>
         </div>
         <div className={style.block_width}>
           <span className={style.personal}>

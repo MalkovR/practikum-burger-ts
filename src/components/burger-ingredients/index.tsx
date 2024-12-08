@@ -1,10 +1,10 @@
-import {useMemo, useRef, useState} from "react";
-import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
+import { useMemo, useRef, useState } from "react";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-ingredients.module.css";
-import {BurgerIngredientsList} from "../burger-ingredients-list";
-import {useSelector} from "react-redux";
-import {getBurgerIngredients} from "../../services/burger-ingredients/selectors";
-import {TBurgerIngredient} from "../../types/common.ts";
+import { BurgerIngredientsList } from "../burger-ingredients-list";
+import { useSelector } from "../../services/store";
+import { getBurgerIngredients } from "../../services/burger-ingredients/selectors";
+import { TBurgerIngredient } from "../../types/common.ts";
 
 export const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = useState("bun");

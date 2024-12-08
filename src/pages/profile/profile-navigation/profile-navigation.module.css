@@ -2,12 +2,14 @@
   width: 320px;
   display: flex;
   flex-direction: column;
+  text-align: left;
+  gap: 20px;
 }
 
 .text {
   line-height: 30px;
   text-align: left;
-  align-content: center;
+  align-content: flex-start;
   height: 64px;
 }
 

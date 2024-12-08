@@ -1,9 +1,14 @@
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import style from "./profile-form.module.css";
-import {Button, EmailInput, Input, PasswordInput,} from "@ya.praktikum/react-developer-burger-ui-components";
-import {useDispatch, useSelector} from "react-redux";
-import {getUserData} from "../../../services/auth/selectors";
-import {editUser} from "../../../services/auth/actions";
+import {
+  Button,
+  EmailInput,
+  Input,
+  PasswordInput,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDispatch, useSelector } from "../../../services/store";
+import { getUserData } from "../../../services/auth/selectors";
+import { editUser } from "../../../services/auth/actions";
 
 export const ProfileForm = () => {
   const dispatch = useDispatch();
@@ -37,7 +42,6 @@ export const ProfileForm = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(editUser(data));
     setButtonActive(false);
   };

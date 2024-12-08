@@ -1,8 +1,11 @@
-import {FormEvent, useState} from "react";
+import { FormEvent, useState } from "react";
 import style from "./forgot-password.module.css";
-import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, useNavigate} from "react-router-dom";
-import {forgotPasswordRequest} from "../../utils/burger-api";
+import {
+  Button,
+  Input,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link, useNavigate } from "react-router-dom";
+import { forgotPasswordRequest } from "../../utils/burger-api";
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();

@@ -1,17 +1,28 @@
-import {useMemo, useState} from "react";
-import {Button, ConstructorElement, CurrencyIcon,} from "@ya.praktikum/react-developer-burger-ui-components";
+import { useMemo, useState } from "react";
+import {
+  Button,
+  ConstructorElement,
+  CurrencyIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-constructor.module.css";
-import {Modal} from "../modal";
-import {OrderDetails} from "../order-details";
-import {useDispatch, useSelector} from "react-redux";
-import {getConstructorIngredients} from "../../services/burger-constructor/selectors";
-import {addBun, addIngredient, resetConstructor,} from "../../services/burger-constructor/actions";
-import {getOrderDetails, resetOrder} from "../../services/order/actions";
-import {useDrop} from "react-dnd";
-import {BurgerConstructorItem} from "../burger-constructor-item";
-import {getIsUserLoaded} from "../../services/auth/selectors";
-import {useNavigate} from "react-router-dom";
-import {TBurgerIngredient, TBurgerIngredientWithUuid,} from "../../types/common.ts";
+import { Modal } from "../modal";
+import { OrderDetails } from "../order-details";
+import { useDispatch, useSelector } from "../../services/store";
+import { getConstructorIngredients } from "../../services/burger-constructor/selectors";
+import {
+  addBun,
+  addIngredient,
+  resetConstructor,
+} from "../../services/burger-constructor/actions";
+import { getOrderDetails, resetOrder } from "../../services/order/actions";
+import { useDrop } from "react-dnd";
+import { BurgerConstructorItem } from "../burger-constructor-item";
+import { getIsUserLoaded } from "../../services/auth/selectors";
+import { useNavigate } from "react-router-dom";
+import {
+  TBurgerIngredient,
+  TBurgerIngredientWithUuid,
+} from "../../types/common.ts";
 
 export const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -46,17 +57,14 @@ export const BurgerConstructor = () => {
     accept: "ingredient",
     drop(item: TBurgerIngredient) {
       item.type === "bun"
-        ? // @ts-ignore
-          dispatch(addBun(item))
-        : // @ts-ignore
-          dispatch(addIngredient(item));
+        ? dispatch(addBun(item))
+        : dispatch(addIngredient(item));
     },
   }));
 
   const userLoaded = useSelector(getIsUserLoaded);
 
   const handleOrder = () => {
-    // @ts-ignore
     dispatch(getOrderDetails(getConstructorIds));
     setOpenModal(true);
   };

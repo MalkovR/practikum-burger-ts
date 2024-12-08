@@ -1,8 +1,11 @@
-import {FormEvent, useRef, useState} from "react";
+import { FormEvent, useRef, useState } from "react";
 import style from "./reset-password.module.css";
-import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, useNavigate} from "react-router-dom";
-import {resetPasswordRequest} from "../../utils/burger-api";
+import {
+  Button,
+  Input,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link, useNavigate } from "react-router-dom";
+import { resetPasswordRequest } from "../../utils/burger-api";
 
 export const ResetPassword = () => {
   const navigate = useNavigate();

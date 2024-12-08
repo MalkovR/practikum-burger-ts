@@ -1,8 +1,8 @@
-import {IngredientItem} from "../ingredient-item";
-import {useDispatch} from "react-redux";
-import {getIngredientsDetails} from "../../services/selected-ingredient/actions";
+import { IngredientItem } from "../ingredient-item";
+import { useDispatch } from "../../services/store";
+import { getIngredientsDetails } from "../../services/selected-ingredient/actions";
 import style from "./burger-ingredients-list.module.css";
-import {TBurgerIngredient} from "../../types/common.ts";
+import { TBurgerIngredient } from "../../types/common.ts";
 
 type TBurgerIngredientsListProps = {
   items: Array<TBurgerIngredient>;
@@ -18,7 +18,6 @@ export const BurgerIngredientsList = ({
       {items.map((item) => (
         <div
           key={item._id}
-          // @ts-ignore
           onClick={() => dispatch(getIngredientsDetails(item))}
         >
           <IngredientItem burgerIngredient={item} />

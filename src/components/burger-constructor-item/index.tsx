@@ -1,10 +1,16 @@
-import {useRef} from "react";
-import {ConstructorElement, DragIcon,} from "@ya.praktikum/react-developer-burger-ui-components";
+import { useRef } from "react";
+import {
+  ConstructorElement,
+  DragIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-constructor.module.css";
-import {useDrag, useDrop, XYCoord} from "react-dnd";
-import {useDispatch} from "react-redux";
-import {moveIngredient, removeIngredient,} from "../../services/burger-constructor/actions";
-import {TBurgerIngredientWithUuid} from "../../types/common.ts";
+import { useDrag, useDrop, XYCoord } from "react-dnd";
+import { useDispatch } from "../../services/store.ts";
+import {
+  moveIngredient,
+  removeIngredient,
+} from "../../services/burger-constructor/actions";
+import { TBurgerIngredientWithUuid } from "../../types/common.ts";
 
 type TBurgerConstructorItemProps = {
   id: string;
@@ -86,8 +92,7 @@ export const BurgerConstructorItem = ({
         text={item.name}
         price={item.price}
         thumbnail={item.image_mobile}
-        // @ts-ignore
-        handleClose={() => dispatch(removeIngredient(item.uuid))}
+        handleClose={() => dispatch(removeIngredient(item))}
       />
     </div>
   );

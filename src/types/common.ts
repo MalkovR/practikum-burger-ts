@@ -18,3 +18,26 @@ export type TBurgerIngredient = {
 };
 
 export type TBurgerIngredientWithUuid = TBurgerIngredient & { uuid: string };
+
+export type TUser = {
+  email: string;
+  name: string;
+  password?: string;
+};
+
+export type TWSOrder = {
+  createdAt: string;
+  ingredients: Array<string>;
+  name: string;
+  number: number;
+  status: string;
+  updatedAt: string;
+  _id: string;
+};
+
+export type TWSOrders = {
+  success: boolean;
+  orders: Array<TWSOrder>;
+  total: 0;
+  totalToday: 0;
+};

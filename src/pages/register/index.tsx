@@ -1,9 +1,12 @@
-import {FormEvent, useRef, useState} from "react";
+import { FormEvent, useRef, useState } from "react";
 import style from "./register.module.css";
-import {Button, Input,} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {register} from "../../services/auth/actions";
+import {
+  Button,
+  Input,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link } from "react-router-dom";
+import { useDispatch } from "../../services/store";
+import { register } from "../../services/auth/actions";
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -26,7 +29,6 @@ export const Register = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(register({ email: email, password: password, name: username }));
   };
 
