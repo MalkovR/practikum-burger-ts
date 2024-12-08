@@ -1,6 +1,9 @@
 {
   "preset": "ts-jest",
   "transform": {
-    "^.+\\.tsx?$": "ts-jest"
+    "^.+\\.(t|j)sx?$": [
+      "ts-jest",
+      { "diagnostics": { "ignoreCodes": ["TS151001"] }}
+    ]
   }
 }
