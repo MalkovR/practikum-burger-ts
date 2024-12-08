@@ -9,7 +9,7 @@ export type TSelectedIngredientState = {
   selectedIngredient: TBurgerIngredient | null;
 };
 
-const initialState: TSelectedIngredientState = {
+export const initialState: TSelectedIngredientState = {
   selectedIngredient: null,
 };
 
