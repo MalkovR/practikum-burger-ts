@@ -83,7 +83,11 @@ export const BurgerIngredients = () => {
               Начинки
             </Tab>
           </div>
-          <div className={style.scrollbar} onScroll={onScroll}>
+          <div
+            className={style.scrollbar}
+            onScroll={onScroll}
+            data-testid={"scroll-sidebar"}
+          >
             <div className={style.title} ref={refBuns}>
               <p className="text_type_main-medium">Булки</p>
             </div>

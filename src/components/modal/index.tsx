@@ -23,10 +23,17 @@ export const Modal = ({ title, onClose, children }: TModalProps) => {
 
   return createPortal(
     <>
-      <div className={`${style.modal} pt-10 pb-15 pl-10 pr-10`}>
+      <div
+        className={`${style.modal} pt-10 pb-15 pl-10 pr-10`}
+        data-testid={"modal_opened"}
+      >
         <div className={`${style.title} text text_type_main-large`}>
           <p>{title}</p>
-          <button className={style.close_button} onClick={onClose}>
+          <button
+            className={style.close_button}
+            onClick={onClose}
+            data-testid={"close_modal"}
+          >
             <CloseIcon onClick={onClose} type="primary" />
           </button>
         </div>
