@@ -57,10 +57,11 @@ export const Login = () => {
             icon={isPasswordHidden ? "ShowIcon" : "HideIcon"}
             onIconClick={hidePassword}
           />
-
-          <Button htmlType="submit" type="primary" size="medium">
-            Войти
-          </Button>
+          <div data-testid={"submit-login"}>
+            <Button htmlType="submit" type="primary" size="medium">
+              Войти
+            </Button>
+          </div>
         </form>
       </div>
       <div>

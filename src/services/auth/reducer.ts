@@ -19,7 +19,7 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   TAuthActions,
-} from "./actions.js";
+} from "./actions.ts";
 
 export type TAuthState = {
   user: {
@@ -32,7 +32,7 @@ export type TAuthState = {
   error: null | string;
 };
 
-const initialState: TAuthState = {
+export const initialState: TAuthState = {
   user: {
     email: "",
     name: "",

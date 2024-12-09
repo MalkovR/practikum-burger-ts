@@ -19,6 +19,7 @@ export const BurgerIngredientsList = ({
         <div
           key={item._id}
           onClick={() => dispatch(getIngredientsDetails(item))}
+          data-testid={"ingredient_" + item._id}
         >
           <IngredientItem burgerIngredient={item} />
         </div>

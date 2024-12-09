@@ -1,7 +1,7 @@
 import { getOrderData } from "../../utils/burger-api";
 import { AppThunk } from "../store.ts";
 
-export const POST_ORDER: "POST_ORDER" = "POST_ORDER";
+export const POST_ORDER_REQUEST: "POST_ORDER_REQUEST" = "POST_ORDER_REQUEST";
 export const POST_ORDER_SUCCESS: "POST_ORDER_SUCCESS" = "POST_ORDER_SUCCESS";
 export const POST_ORDER_ERROR: "POST_ORDER_ERROR" = "POST_ORDER_ERROR";
 export const RESET_ORDER: "RESET_ORDER" = "RESET_ORDER";
@@ -24,7 +24,7 @@ type TResetOrder = {
   readonly type: typeof RESET_ORDER;
 };
 type TPostOrder = {
-  readonly type: typeof POST_ORDER;
+  readonly type: typeof POST_ORDER_REQUEST;
 };
 
 export type TOrderActions =
@@ -35,7 +35,7 @@ export type TOrderActions =
 
 export const getOrderDetails: AppThunk =
   (ingredient_ids: Array<string>) => (dispatch) => {
-    dispatch({ type: POST_ORDER });
+    dispatch({ type: POST_ORDER_REQUEST });
     let accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
       accessToken = "Bearer " + accessToken;

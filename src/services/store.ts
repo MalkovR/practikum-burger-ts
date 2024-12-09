@@ -25,7 +25,7 @@ import {
   TWsActions,
 } from "./feed-ws/actions.ts";
 
-const wsActions = {
+export const wsActions = {
   wsInit: WS_CONNECTION_START,
   wsSendMessage: WS_SEND_MESSAGE,
   wsStop: WS_CONNECTION_STOP,

@@ -5,7 +5,7 @@ import {
   REMOVE_INGREDIENT,
   RESET_CONSTRUCTOR,
   TBurgerConstructorActions,
-} from "./actions.js";
+} from "./actions.ts";
 import {
   TBurgerIngredient,
   TBurgerIngredientWithUuid,
@@ -16,7 +16,7 @@ export type TBurgerConstructorState = {
   ingredients: Array<TBurgerIngredientWithUuid>;
 };
 
-const initialState: TBurgerConstructorState = {
+export const initialState: TBurgerConstructorState = {
   bun: null,
   ingredients: [],
 };
