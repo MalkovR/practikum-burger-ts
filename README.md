@@ -2,4 +2,4 @@
 
 ### Описание:
 
-Учебный проект по React, результат доступен по ссылке - http://rmburgers.students.nomorepartiesco.ru/
+Учебный проект по React, результат доступен по ссылке - https://rmburgers.students.nomorepartiesco.ru/
