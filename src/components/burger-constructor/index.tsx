@@ -73,18 +73,25 @@ export const BurgerConstructor = () => {
     <>
       <div className={style.burger_constructor_container}>
         <div className={style.content}>
-          <div className={style.constructor_list} ref={drop}>
+          <div
+            className={style.constructor_list}
+            ref={drop}
+            data-testid={"constructor_list"}
+          >
             {bun ? (
-              <ConstructorElement
-                type="top"
-                isLocked={true}
-                text={`${bun.name} (верх)`}
-                price={bun.price}
-                thumbnail={bun.image_mobile}
-              />
+              <div data-testid={"constructor-bun-top"}>
+                <ConstructorElement
+                  type="top"
+                  isLocked={true}
+                  text={`${bun.name} (верх)`}
+                  price={bun.price}
+                  thumbnail={bun.image_mobile}
+                />
+              </div>
             ) : (
               <div
                 className={`constructor-element constructor-element_pos_top ${style.align_center}`}
+                data-testid={"constructor-bun-top-empty"}
               >
                 <p className="constructor-element__text text text_type_main-medium">
                   Нужна булка
@@ -95,33 +102,41 @@ export const BurgerConstructor = () => {
               <div className={style.elements_list}>
                 {ingredients.map(
                   (item: TBurgerIngredientWithUuid, index: number) => (
-                    <BurgerConstructorItem
-                      key={item.uuid}
-                      id={item.uuid}
-                      index={index}
-                      item={item}
-                    />
+                    <div data-testid={"constructor-ingredient_" + item._id}>
+                      <BurgerConstructorItem
+                        key={item.uuid}
+                        id={item.uuid}
+                        index={index}
+                        item={item}
+                      />
+                    </div>
                   ),
                 )}
               </div>
             ) : (
-              <div className={`constructor-element ${style.align_center}`}>
+              <div
+                className={`constructor-element ${style.align_center}`}
+                data-testid={"constructor-ingredient-empty"}
+              >
                 <p className="constructor-element__text text text_type_main-medium">
                   Нужны ингредиенты
                 </p>
               </div>
             )}
             {bun ? (
-              <ConstructorElement
-                type="bottom"
-                isLocked={true}
-                text={`${bun.name} (низ)`}
-                price={bun.price}
-                thumbnail={bun.image_mobile}
-              />
+              <div data-testid={"constructor-bun-bottom"}>
+                <ConstructorElement
+                  type="bottom"
+                  isLocked={true}
+                  text={`${bun.name} (низ)`}
+                  price={bun.price}
+                  thumbnail={bun.image_mobile}
+                />
+              </div>
             ) : (
               <div
                 className={`constructor-element constructor-element_pos_bottom ${style.align_center}`}
+                data-testid={"constructor-bun-bottom-empty"}
               >
                 <p className="constructor-element__text text text_type_main-medium">
                   Нужна булка
@@ -134,15 +149,17 @@ export const BurgerConstructor = () => {
               <p className="text text_type_main-large">{totalPrice}</p>
               <CurrencyIcon type="primary" />
             </span>
-            <Button
-              htmlType="button"
-              type="primary"
-              size="medium"
-              onClick={userLoaded ? handleOrder : () => navigate("/login")}
-              disabled={!bun}
-            >
-              Оформить заказ
-            </Button>
+            <div data-testid={"order-button"}>
+              <Button
+                htmlType="button"
+                type="primary"
+                size="medium"
+                onClick={userLoaded ? handleOrder : () => navigate("/login")}
+                disabled={!bun}
+              >
+                Оформить заказ
+              </Button>
+            </div>
           </div>
         </div>
       </div>

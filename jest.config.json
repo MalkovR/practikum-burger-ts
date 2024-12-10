@@ -1,0 +1,9 @@
+{
+  "preset": "ts-jest",
+  "transform": {
+    "^.+\\.(t|j)sx?$": [
+      "ts-jest",
+      { "diagnostics": { "ignoreCodes": ["TS151001"] }}
+    ]
+  }
+}

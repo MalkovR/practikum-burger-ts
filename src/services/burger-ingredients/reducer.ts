@@ -1,9 +1,9 @@
 import {
   INGREDIENTS_LOAD_ERROR,
   INGREDIENTS_LOAD_SUCCESS,
-  INGREDIENTS_LOADING,
+  INGREDIENTS_LOAD_REQUEST,
   TIngredientsActions,
-} from "./actions.js";
+} from "./actions.ts";
 import { TBurgerIngredient } from "../../types/common.ts";
 
 export type TIngredientsState = {
@@ -13,7 +13,7 @@ export type TIngredientsState = {
   error: null | string;
 };
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
   success: false,
   ingredients: [],
   loading: false,
@@ -22,7 +22,7 @@ const initialState: TIngredientsState = {
 
 export const reducer = (state = initialState, action: TIngredientsActions) => {
   switch (action.type) {
-    case INGREDIENTS_LOADING:
+    case INGREDIENTS_LOAD_REQUEST:
       return {
         ...state,
         loading: true,

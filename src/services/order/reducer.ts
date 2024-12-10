@@ -1,5 +1,5 @@
 import {
-  POST_ORDER,
+  POST_ORDER_REQUEST,
   POST_ORDER_ERROR,
   POST_ORDER_SUCCESS,
   RESET_ORDER,
@@ -16,7 +16,7 @@ export type TOrderState = {
   error: null | string;
 };
 
-const initialState: TOrderState = {
+export const initialState: TOrderState = {
   success: true,
   name: null,
   order: { number: null },
@@ -26,7 +26,7 @@ const initialState: TOrderState = {
 
 export const reducer = (state = initialState, action: TOrderActions) => {
   switch (action.type) {
-    case POST_ORDER:
+    case POST_ORDER_REQUEST:
       return {
         ...state,
         loading: true,
