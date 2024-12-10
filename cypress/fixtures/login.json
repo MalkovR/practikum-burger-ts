@@ -1,7 +1,7 @@
 {
   "success": true,
-  "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTFjZmU0ZTM2N2RlMDAxZGFmNmU3NyIsImlhdCI6MTczMzc0MDEzNywiZXhwIjoxNzMzNzQxMzM3fQ.Y9kJD8QsTjkpHgg50f9uRKk5jz36KLHgERO5N_K2hRA",
-  "refreshToken": "050daf39d83ef2bd0bf3d2562415eaf5aad93aeab079c3bbfca4a1e1caed41c19b267d5b745307fa",
+  "accessToken": "Bearer xyz",
+  "refreshToken": "www",
   "user": {
     "email": "test999user@example.com",
     "name": "test999useruser"
